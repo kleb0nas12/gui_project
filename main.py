@@ -10,6 +10,8 @@ class MainWindow:
         self.ui = Ui_MainWindow()  # quick layout access
         self.db = MyDatabase()  # initializing Postgres database connection and methods
         self.ui.setupUi(self.main_win)
+        self.db.islaidos_query()
+
 
 ####### here we describe main screens (pradiza,nustatymai,islaidos) and implement functionality ########
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageNoData)
