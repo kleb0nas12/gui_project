@@ -10,10 +10,11 @@ class MainWindow:
         self.ui = Ui_MainWindow()  # quick layout access
         self.db = MyDatabase()  # initializing Postgres database connection and methods
         self.ui.setupUi(self.main_win)
-        
+        self.db.add_islaidos('Mango',True)
         #TODO##### Delete after testing
         self.db.islaidos_query() # checking db query and data popaltion into tables
         #TODO################################
+        
 
 
 ####### here we describe main screens (pradiza,nustatymai,islaidos) and implement functionality ########
