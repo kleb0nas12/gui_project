@@ -20,4 +20,7 @@ class MyDatabase():
         self.cur.execute('SELECT * FROM islaidu_tipai ORDER BY aktyvus DESC, tipai ASC') 
         data = self.cur.fetchall()
         return data
-        
+    
+    # add values to islaidu_tipai table
+    def add_islaidos(self,tipai:str,aktyvus:bool):
+        self.cur.execute('INSERT INTO islaidu_tipai (tipai, aktyvus) VALUES ({},{})'.format(tipai,aktyvus))
