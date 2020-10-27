@@ -19,11 +19,10 @@ class MyDatabase():
             self.cur.execute(
                 'SELECT * FROM islaidu_tipai ORDER BY aktyvus DESC, tipai ASC')
             data = self.cur.fetchall()
-            print(data) #! Delete #####################################
             return data
         except (Exception, psycopg2.Error) as err:
                 # TODO# show dialog box if connection problem/failed to execute
-                print('Failed to execute', err) #! Delete #####################################
+                pass
         finally:
             #closing db connection
             if self.connection:
@@ -31,7 +30,7 @@ class MyDatabase():
                 self.connection.close()
 
     # add values to islaidu_tipai table
-    
+
     def add_islaidos(self, tipai: str, aktyvus: bool):
         try:
             self.cur.execute(
