@@ -3,10 +3,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 ############ basic layout/GUI for the application #################################
 
-### islaidu_tipai input widget ###
-class Ui_islaidos_tipai_forma(object):
+### islaidu_tipai input widget/dialog ###
+class Ui_IslTipForma(object):
     def setupUi(self, islaidos_tipai_forma):
-        islaidos_tipai_forma.setObjectName("islaidos_tipai_forma")
+        islaidos_tipai_forma.setObjectName("isl_dialog")
         islaidos_tipai_forma.resize(392, 330)
         self.pushButton = QtWidgets.QPushButton(islaidos_tipai_forma)
         self.pushButton.setGeometry(QtCore.QRect(70, 230, 93, 28))
