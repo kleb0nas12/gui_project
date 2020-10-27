@@ -4,17 +4,14 @@ from layout import Ui_MainWindow
 from database import MyDatabase
 
 #### Here we implement the main working structure of the application and laying out full working logic behind it ##########
+
+
 class MainWindow:
     def __init__(self):
         self.main_win = QMainWindow()  # quick QMainWindow access
         self.ui = Ui_MainWindow()  # quick layout access
         self.db = MyDatabase()  # initializing Postgres database connection and methods
         self.ui.setupUi(self.main_win)
-        self.db.add_islaidos('Mango',True)
-        #TODO##### Delete after testing
-        self.db.islaidos_query() # checking db query and data popaltion into tables
-        #TODO################################
-        
 
 
 ####### here we describe main screens (pradiza,nustatymai,islaidos) and implement functionality ########
@@ -24,6 +21,8 @@ class MainWindow:
         self.ui.pushButton_2.clicked.connect(self.nustatymai_screen)
         self.ui.pushButton_3.clicked.connect(self.islaidos_screen)
 ################################################################################################
+
+    #### main screens menu-elements/buttons functionality ########
     def pradzia_screen(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageHome)
 
@@ -32,7 +31,9 @@ class MainWindow:
 
     def islaidos_screen(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageIslaidos)
-    # method to show output
+    ###############################################################
+    #
+    #  method to show output
 
     def show(self):
         self.main_win.show()

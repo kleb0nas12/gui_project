@@ -111,9 +111,19 @@ class Ui_MainWindow(object):
         self.pushButton_4.setFont(font)
         self.pushButton_4.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.pushButton_4.setObjectName("pushButton_4")
-        self.tableView_2 = QtWidgets.QTableView(self.pageNustatymai)
-        self.tableView_2.setGeometry(QtCore.QRect(150, 210, 1131, 501))
-        self.tableView_2.setObjectName("tableView_2")
+        ### IslaiduTipai table 
+        self.tableWidgetIslaidos = QtWidgets.QTableWidget(self.pageNustatymai)
+        self.tableWidgetIslaidos.setGeometry(QtCore.QRect(200, 250, 961, 571))
+        self.tableWidgetIslaidos.setObjectName("tableWidgetIslaidos")
+        self.tableWidgetIslaidos.setColumnCount(2)
+        self.tableWidgetIslaidos.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetIslaidos.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetIslaidos.setHorizontalHeaderItem(1, item)
+        self.tableWidgetIslaidos.horizontalHeader().setCascadingSectionResizes(False)
+        self.tableWidgetIslaidos.horizontalHeader().setDefaultSectionSize(450)
+        self.tableWidgetIslaidos.verticalHeader().setMinimumSectionSize(30)
         self.stackedWidget.addWidget(self.pageNustatymai)
 
         ### 'Islaidos' page
@@ -261,6 +271,10 @@ class Ui_MainWindow(object):
         self.nasumas_label.setText(_translate("MainWindow", "Įmonės našumas"))
         self.label_3.setText(_translate("MainWindow", "Išlaidos:"))
         self.pushButton_4.setText(_translate("MainWindow", "pridėti tipą"))
+        item = self.tableWidgetIslaidos.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "Pavadinimas"))
+        item = self.tableWidgetIslaidos.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "Aktyvus"))
         self.label_5.setText(_translate("MainWindow", "Nuo:"))
         self.label_6.setText(_translate("MainWindow", "Iki:"))
         self.label_7.setText(_translate("MainWindow", "DATA"))
@@ -274,3 +288,4 @@ class Ui_MainWindow(object):
         self.checkBox_5.setText(_translate("MainWindow", "Praėjęs mėnuo"))
         self.pushButton_6.setText(_translate("MainWindow", "ieškoti"))
         self.pushButton_7.setText(_translate("MainWindow", "pridėti"))
+
