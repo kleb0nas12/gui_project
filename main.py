@@ -21,12 +21,13 @@ class MainWindow:
         self.db = MyDatabase()  # initializing Postgres database connection and methods
 
 #?### here we describe functionality of all input/interaction elements (buttons,menu fiels ect.) ####
-        self.ui.stackedWidget.setCurrentWidget(self.ui.pageNoData) 
+        self.ui.stackedWidget.setCurrentWidget(self.ui.pageNoData) ## if db connection inactive
         self.ui.pushButton.clicked.connect(self.pradzia_screen) ## pradzia menu button, sets screen to pradzia
         self.ui.pushButton_2.clicked.connect(self.nustatymai_screen)## nustatymai menu button, sets screen to nustatymai -> islaidu-tipai
         self.ui.pushButton_3.clicked.connect(self.islaidos_screen)## islaidos menu button, sets screen to islaidos -> islaidos
         self.ui.pushButton_4.clicked.connect(self.islaidu_dialog) # 'prideti tipa' button calls islaidu_tipai dialog
         self.isl_dialog.pushButton.clicked.connect(self.add_isl_tipa)
+        #self.isl_dialog.pushButton_2.clicked.connect(self.reject)
 #?###############################################################################################
 
     #### main screens menu-elements/buttons functionality ########
@@ -50,7 +51,12 @@ class MainWindow:
     # adding new 'islaidu tipas' to database
     def add_isl_tipa(self):
         _new_type :str = self.isl_dialog.lineEdit.text()
-        #self.db.add_
+        print(_new_type)
+        self.db.add_islaidos(_new_type,False)
+        self.ui.stackedWidget.setCurrentWidget(self.nustatymai_screen)
+        
+
+
 
 
     ###############################################################
