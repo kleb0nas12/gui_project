@@ -1,15 +1,62 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-### basic layout/GUI for the application 
+
+############ basic layout/GUI for the application #################################
+
+### islaidu_tipai input widget ###
+class Ui_islaidos_tipai_forma(object):
+    def setupUi(self, islaidos_tipai_forma):
+        islaidos_tipai_forma.setObjectName("islaidos_tipai_forma")
+        islaidos_tipai_forma.resize(392, 330)
+        self.pushButton = QtWidgets.QPushButton(islaidos_tipai_forma)
+        self.pushButton.setGeometry(QtCore.QRect(70, 230, 93, 28))
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(islaidos_tipai_forma)
+        self.pushButton_2.setGeometry(QtCore.QRect(210, 230, 93, 28))
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.lineEdit = QtWidgets.QLineEdit(islaidos_tipai_forma)
+        self.lineEdit.setGeometry(QtCore.QRect(40, 120, 301, 41))
+        font = QtGui.QFont()
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        font.setStrikeOut(False)
+        font.setKerning(True)
+        self.lineEdit.setFont(font)
+        self.lineEdit.setText("")
+        self.lineEdit.setObjectName("lineEdit")
+        self.label = QtWidgets.QLabel(islaidos_tipai_forma)
+        self.label.setGeometry(QtCore.QRect(150, 90, 91, 20))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+
+        self.retranslateUi(islaidos_tipai_forma)
+        QtCore.QMetaObject.connectSlotsByName(islaidos_tipai_forma)
+
+    def retranslateUi(self, islaidos_tipai_forma):
+        _translate = QtCore.QCoreApplication.translate
+        islaidos_tipai_forma.setWindowTitle(
+            _translate("islaidos_tipai_forma", "Dialog"))
+        self.pushButton.setText(_translate("islaidos_tipai_forma", "Saugoti"))
+        self.pushButton_2.setText(_translate(
+            "islaidos_tipai_forma", "Uždaryti"))
+        self.lineEdit.setPlaceholderText(_translate(
+            "islaidos_tipai_forma", "įvesti (abc,123)"))
+        self.label.setText(_translate("islaidos_tipai_forma", "Pavadinimas:"))
+
+
+# main windows application layout (without external widgets)
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        ### main window size parameters
+        # main window size parameters
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1600, 1200)
         MainWindow.setMinimumSize(QtCore.QSize(1600, 1200))
         MainWindow.setMaximumSize(QtCore.QSize(1600, 1200))
 
-        ## central widget, main screen
+        # central widget, main screen
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.line = QtWidgets.QFrame(self.centralwidget)
@@ -18,7 +65,7 @@ class Ui_MainWindow(object):
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
 
-        ## meniu action buttons and text widgets
+        # meniu action buttons and text widgets
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(0, 30, 141, 41))
         self.pushButton.setIconSize(QtCore.QSize(30, 30))
@@ -41,21 +88,21 @@ class Ui_MainWindow(object):
         self.Meniu.setScaledContents(False)
         self.Meniu.setAlignment(QtCore.Qt.AlignCenter)
         self.Meniu.setObjectName("Meniu")
-        
-        ########### stacked widget area , where different screens (depending what area are chosen (menu option)) are stacked on each other
+
+        # stacked widget area , where different screens (depending what area are chosen (menu option)) are stacked on each other
         self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
         self.stackedWidget.setGeometry(QtCore.QRect(140, 0, 1451, 1191))
         self.stackedWidget.setObjectName("stackedWidget")
-        
-        ### the 'database hasn't been connected screen' , in case there is no active local db connection setup
+
+        # the 'database hasn't been connected screen' , in case there is no active local db connection setup
         self.pageNoData = QtWidgets.QWidget()
         self.pageNoData.setObjectName("pageNoData")
         self.label = QtWidgets.QLabel(self.pageNoData)
         self.label.setGeometry(QtCore.QRect(460, 330, 461, 341))
         font = QtGui.QFont()
         font.setPointSize(25)
-        
-        #### 'pradzia'page
+
+        # 'pradzia'page
         self.label.setFont(font)
         self.label.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.label.setFrameShape(QtWidgets.QFrame.Box)
@@ -77,7 +124,8 @@ class Ui_MainWindow(object):
         self.label_2.setWordWrap(True)
         self.label_2.setObjectName("label_2")
         self.pushButtonIslaidosMain = QtWidgets.QPushButton(self.pageHome)
-        self.pushButtonIslaidosMain.setGeometry(QtCore.QRect(640, 390, 141, 51))
+        self.pushButtonIslaidosMain.setGeometry(
+            QtCore.QRect(640, 390, 141, 51))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pushButtonIslaidosMain.setFont(font)
@@ -98,7 +146,7 @@ class Ui_MainWindow(object):
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
 
-        #### 'Nustatymai' page
+        # 'Nustatymai' page
         self.stackedWidget.addWidget(self.pageHome)
         self.pageNustatymai = QtWidgets.QWidget()
         self.pageNustatymai.setObjectName("pageNustatymai")
@@ -111,7 +159,7 @@ class Ui_MainWindow(object):
         self.pushButton_4.setFont(font)
         self.pushButton_4.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.pushButton_4.setObjectName("pushButton_4")
-        ### IslaiduTipai table 
+        # IslaiduTipai table
         self.tableWidgetIslaidos = QtWidgets.QTableWidget(self.pageNustatymai)
         self.tableWidgetIslaidos.setGeometry(QtCore.QRect(200, 250, 961, 571))
         self.tableWidgetIslaidos.setObjectName("tableWidgetIslaidos")
@@ -126,7 +174,7 @@ class Ui_MainWindow(object):
         self.tableWidgetIslaidos.verticalHeader().setMinimumSectionSize(30)
         self.stackedWidget.addWidget(self.pageNustatymai)
 
-        ### 'Islaidos' page
+        # 'Islaidos' page
         self.pageIslaidos = QtWidgets.QWidget()
         self.pageIslaidos.setObjectName("pageIslaidos")
         self.dateEditFrom = QtWidgets.QDateEdit(self.pageIslaidos)
@@ -149,7 +197,8 @@ class Ui_MainWindow(object):
         self.label_6.setObjectName("label_6")
         self.dateEditTo = QtWidgets.QDateEdit(self.pageIslaidos)
         self.dateEditTo.setGeometry(QtCore.QRect(750, 220, 111, 31))
-        self.dateEditTo.setDateTime(QtCore.QDateTime(QtCore.QDate(2000, 1, 1), QtCore.QTime(0, 7, 0)))
+        self.dateEditTo.setDateTime(QtCore.QDateTime(
+            QtCore.QDate(2000, 1, 1), QtCore.QTime(0, 7, 0)))
         self.dateEditTo.setCurrentSection(QtWidgets.QDateTimeEdit.DaySection)
         self.dateEditTo.setCalendarPopup(True)
         self.dateEditTo.setCurrentSectionIndex(0)
@@ -248,7 +297,7 @@ class Ui_MainWindow(object):
         self.graphicsView.setObjectName("graphicsView")
         self.stackedWidget.addWidget(self.pageIslaidos)
 
-        #### status bar and default menu area (default menu = False)
+        # status bar and default menu area (default menu = False)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -257,7 +306,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    ## naming function for layout properties
+    # naming function for layout properties
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -265,9 +314,11 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(_translate("MainWindow", "Nustatymai"))
         self.pushButton_3.setText(_translate("MainWindow", "Išlaidos"))
         self.Meniu.setText(_translate("MainWindow", "Meniu"))
-        self.label.setText(_translate("MainWindow", "Patikrinkite , ar yra veikianti duomenų bazė"))
+        self.label.setText(_translate(
+            "MainWindow", "Patikrinkite , ar yra veikianti duomenų bazė"))
         self.label_2.setText(_translate("MainWindow", "250,12 €"))
-        self.pushButtonIslaidosMain.setText(_translate("MainWindow", "pridėti išlaidas"))
+        self.pushButtonIslaidosMain.setText(
+            _translate("MainWindow", "pridėti išlaidas"))
         self.nasumas_label.setText(_translate("MainWindow", "Įmonės našumas"))
         self.label_3.setText(_translate("MainWindow", "Išlaidos:"))
         self.pushButton_4.setText(_translate("MainWindow", "pridėti tipą"))
@@ -288,4 +339,3 @@ class Ui_MainWindow(object):
         self.checkBox_5.setText(_translate("MainWindow", "Praėjęs mėnuo"))
         self.pushButton_6.setText(_translate("MainWindow", "ieškoti"))
         self.pushButton_7.setText(_translate("MainWindow", "pridėti"))
-

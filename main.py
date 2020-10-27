@@ -46,6 +46,7 @@ class MainWindow:
 
         try:
             _data = self.db.islaidos_query() # getting data,already ordered 
+            print(_data)
             self.ui.tableWidgetIslaidos.setRowCount(len(_data)) # setting exact number of rows to populate into the table widget
             row = 0
             for val in _data:
