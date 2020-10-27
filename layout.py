@@ -38,7 +38,7 @@ class Ui_IslTipForma(object):
     def retranslateUi(self, islaidos_tipai_forma):
         _translate = QtCore.QCoreApplication.translate
         islaidos_tipai_forma.setWindowTitle(
-            _translate("islaidos_tipai_forma", "Dialog"))
+            _translate("islaidos_tipai_forma", "Išlaidų tipo įvedimo forma"))
         self.pushButton.setText(_translate("islaidos_tipai_forma", "Saugoti"))
         self.pushButton_2.setText(_translate(
             "islaidos_tipai_forma", "Uždaryti"))

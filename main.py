@@ -9,12 +9,16 @@ from PyQt5 import QtWidgets
 
 class MainWindow:
     def __init__(self):
+        ### main window
         self.main_win = QMainWindow()  # quick QMainWindow access
         self.ui = Ui_MainWindow()  # quick layout access
-        self.isl_dialog = Ui_IslTipForma()  # islaidu dialog screen
-        self.db = MyDatabase()  # initializing Postgres database connection and methods
         self.ui.setupUi(self.main_win)
-
+        ## 'prideti nauja tipa' dialog form
+        self.islaidos_tipai_forma = QtWidgets.QDialog()
+        self.isl_dialog = Ui_IslTipForma()  # islaidu dialog screen
+        self.isl_dialog.setupUi(self.islaidos_tipai_forma)
+        ##
+        self.db = MyDatabase()  # initializing Postgres database connection and methods
 
 #?### here we describe functionality of all input/interaction elements (buttons,menu fiels ect.) ####
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageNoData) 
@@ -22,6 +26,7 @@ class MainWindow:
         self.ui.pushButton_2.clicked.connect(self.nustatymai_screen)## nustatymai menu button, sets screen to nustatymai -> islaidu-tipai
         self.ui.pushButton_3.clicked.connect(self.islaidos_screen)## islaidos menu button, sets screen to islaidos -> islaidos
         self.ui.pushButton_4.clicked.connect(self.islaidu_dialog) # 'prideti tipa' button calls islaidu_tipai dialog
+        self.isl_dialog.pushButton.clicked.connect(self.add_isl_tipa)
 #?###############################################################################################
 
     #### main screens menu-elements/buttons functionality ########
@@ -36,13 +41,16 @@ class MainWindow:
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageIslaidos)
     ###############################################################
 
-    ############### dialog functionality ##########################
-    #islaidu_tipai dialog
+    ############### dialog functionality : islaidu-tipai ##########################
+    #islaidu_tipai dialog pop-up
     def islaidu_dialog(self):
-        islaidos_tipai_forma = QtWidgets.QDialog()
-        self.isl_dialog.setupUi(islaidos_tipai_forma)
-        islaidos_tipai_forma.show()
-        islaidos_tipai_forma.exec_()
+        self.islaidos_tipai_forma.show()
+        self.islaidos_tipai_forma.exec_()
+
+    # adding new 'islaidu tipas' to database
+    def add_isl_tipa(self):
+        _new_type :str = self.isl_dialog.lineEdit.text()
+        #self.db.add_
 
 
     ###############################################################
