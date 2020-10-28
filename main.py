@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow
 from layout import Ui_MainWindow
 from database import MyDatabase
 from PyQt5 import QtWidgets
-from widgets.islaidu_tipai import Dialog
+import widgets.islaidu_tipai as tipai
 
 #### Here we implement the main working structure of the application and laying out full working logic behind it ##########
 
@@ -13,9 +13,6 @@ class MainWindow:
         self.main_win = QMainWindow()  # quick QMainWindow access
         self.ui = Ui_MainWindow()  # quick layout access
         self.ui.setupUi(self.main_win)
-        # 'prideti nauja tipa' dialog form
-        # self.isl_dialog = Ui_IslTipForma()  # islaidu dialog screen
-        ##
         self.db = MyDatabase()  # initializing Postgres database connection and methods
 
 #?### here we describe functionality of all input/interaction elements (buttons,menu fiels ect.) ####
@@ -38,6 +35,9 @@ class MainWindow:
     def nustatymai_screen(self):
         self.load_data_islaidos()
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageNustatymai)
+        #self.ui.tableWidgetIslaidos.viewport().repaint()
+        
+        
 
     def islaidos_screen(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageIslaidos)
@@ -46,7 +46,7 @@ class MainWindow:
     ############### dialog functionality ##########################
     # islaidu_tipai dialog pop-up
     def islaidu_dialog(self):
-        ap = Dialog()
+        ap = tipai.Dialog()
         ap.exec_()
 
     ###############################################################

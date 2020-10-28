@@ -4,6 +4,44 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 ############ basic layout/GUI for the application #################################
 
+### 'Islaidos-tipai' edit form
+class Ui_Isleditforma(object):
+    def setupUi(self, Isleditforma):
+        Isleditforma.setObjectName("Isleditforma")
+        Isleditforma.resize(536, 290)
+        self.label = QtWidgets.QLabel(Isleditforma)
+        self.label.setGeometry(QtCore.QRect(40, 95, 101, 21))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.lineEdit = QtWidgets.QLineEdit(Isleditforma)
+        self.lineEdit.setGeometry(QtCore.QRect(170, 90, 231, 31))
+        self.lineEdit.setObjectName("lineEdit")
+        self.checkBox = QtWidgets.QCheckBox(Isleditforma)
+        self.checkBox.setGeometry(QtCore.QRect(420, 89, 101, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.checkBox.setFont(font)
+        self.checkBox.setObjectName("checkBox")
+        self.pushButton = QtWidgets.QPushButton(Isleditforma)
+        self.pushButton.setGeometry(QtCore.QRect(150, 190, 93, 28))
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(Isleditforma)
+        self.pushButton_2.setGeometry(QtCore.QRect(320, 190, 93, 28))
+        self.pushButton_2.setObjectName("pushButton_2")
+
+        self.retranslateUi(Isleditforma)
+        QtCore.QMetaObject.connectSlotsByName(Isleditforma)
+
+    def retranslateUi(self, Isleditforma):
+        _translate = QtCore.QCoreApplication.translate
+        Isleditforma.setWindowTitle(_translate("Isleditforma", "Dialog"))
+        self.label.setText(_translate("Isleditforma", "Pavadinimas:"))
+        self.checkBox.setText(_translate("Isleditforma", "Aktyvus"))
+        self.pushButton.setText(_translate("Isleditforma", "Saugoti"))
+        self.pushButton_2.setText(_translate("Isleditforma", "Uždaryti"))
+
 ### islaidu_tipai input widget/dialog ###
 class Ui_IslTipForma(object):
     def setupUi(self, islaidos_tipai_forma):
