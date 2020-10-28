@@ -1,36 +1,26 @@
 import sys
-sys.path.insert(0,'A:\gui_project')
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
+sys.path.insert(0, 'A:\gui_project')
 from layout import Ui_IslTipForma
-
-
-class TipaiWidget:
-    def __init__(self):
-        print('As cia')
-        self.widget = QtWidgets.QWidget()
-        self.ui = Ui_IslTipForma()
-        self.ui.setupUi(self.widget)
-
-        
-        
-        
-        self.ui.pushButton_2.clicked.connect(self.psh)
-        self.launch()
-        print('As cia ir vel')
-    def psh(self):
-        print('Pavyko')
-        sys.exit(0)
-
-    def show(self):
-        self.widget.show()
-
-    def launch(self):
-        if __name__ == '__main__':
-            app = QtWidgets.QDialog(sys.argv)
-            main_win_screen = TipaiWidget()
-            main_win_screen.show()
-            sys.exit(app.exec_())
+from database import MyDatabase
+from main import main
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 
 
 
+
+
+
+class Dialog(QDialog, Ui_IslTipForma):
+    def __init__(self, parent=None):
+        QDialog.__init__(self, parent)
+        self.database = MyDatabase()
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.add_isl_tipa)
+        self.pushButton_2.clicked.connect(self.close)
+    
+    # adding new 'islaidu tipas' to database
+    def add_isl_tipa(self):
+        _new_type :str = self.lineEdit.text()
+        print(_new_type)
+        self.database.add_islaidos(_new_type,False)
+        self.close()

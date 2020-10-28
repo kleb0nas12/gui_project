@@ -1,32 +1,40 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from layout import Ui_MainWindow, Ui_IslTipForma
+from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow
+from layout import Ui_MainWindow
 from database import MyDatabase
 from PyQt5 import QtWidgets
-from widgets.islaidu_tipai import TipaiWidget
+from widgets.islaidu_tipai import Dialog
 
 #### Here we implement the main working structure of the application and laying out full working logic behind it ##########
+
+# class Dialog(QDialog,Ui_IslTipForma):
+#     def __init__(self, parent=None):
+#         QDialog.__init__(self, parent)
+#         self.setupUi(self)
 
 
 class MainWindow:
     def __init__(self):
-        ### main window
+        # main window
         self.main_win = QMainWindow()  # quick QMainWindow access
         self.ui = Ui_MainWindow()  # quick layout access
         self.ui.setupUi(self.main_win)
-        ## 'prideti nauja tipa' dialog form
-        #self.isl_dialog = Ui_IslTipForma()  # islaidu dialog screen
+        # 'prideti nauja tipa' dialog form
+        # self.isl_dialog = Ui_IslTipForma()  # islaidu dialog screen
         ##
         self.db = MyDatabase()  # initializing Postgres database connection and methods
 
 #?### here we describe functionality of all input/interaction elements (buttons,menu fiels ect.) ####
-        self.ui.stackedWidget.setCurrentWidget(self.ui.pageNoData) ## if db connection inactive
-        self.ui.pushButton.clicked.connect(self.pradzia_screen) ## pradzia menu button, sets screen to pradzia
-        self.ui.pushButton_2.clicked.connect(self.nustatymai_screen)## nustatymai menu button, sets screen to nustatymai -> islaidu-tipai
-        self.ui.pushButton_3.clicked.connect(self.islaidos_screen)## islaidos menu button, sets screen to islaidos -> islaidos
-        self.ui.pushButton_4.clicked.connect(self.islaidu_dialog) # 'prideti tipa' button calls islaidu_tipai dialog
-        #self.isl_dialog.pushButton.clicked.connect(self.add_isl_tipa)
-        #self.isl_dialog.pushButton_2.clicked.connect(self.reject)
+        self.ui.stackedWidget.setCurrentWidget(
+            self.ui.pageNoData)  # if db connection inactive
+        # pradzia menu button, sets screen to pradzia
+        self.ui.pushButton.clicked.connect(self.pradzia_screen)
+        # nustatymai menu button, sets screen to nustatymai -> islaidu-tipai
+        self.ui.pushButton_2.clicked.connect(self.nustatymai_screen)
+        # islaidos menu button, sets screen to islaidos -> islaidos
+        self.ui.pushButton_3.clicked.connect(self.islaidos_screen)
+        # 'prideti tipa' button calls islaidu_tipai dialog
+        self.ui.pushButton_4.clicked.connect(self.islaidu_dialog)
 #?###############################################################################################
 
     #### main screens menu-elements/buttons functionality ########
@@ -41,60 +49,45 @@ class MainWindow:
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageIslaidos)
     ###############################################################
 
-    ############### dialog functionality : islaidu-tipai ##########################
-    #islaidu_tipai dialog pop-up
+    ############### dialog functionality ##########################
+    # islaidu_tipai dialog pop-up
     def islaidu_dialog(self):
-        TipaiWidget().launch
-
-        # self.islaidos_tipai_forma = QtWidgets.QDialog()
-        # self.isl_dialog.setupUi(self.islaidos_tipai_forma)
-        # self.islaidos_tipai_forma.show()
-        # self.islaidos_tipai_forma.exec_()
-        # self.isl_dialog.pushButton.clicked.connect(self.add_isl_tipa)
-
-    # adding new 'islaidu tipas' to database
-    def add_isl_tipa(self):
-        _new_type :str = self.isl_dialog.lineEdit.text()
-        print(_new_type)
-        self.db.add_islaidos(_new_type,False)
-        self.ui.stackedWidget.setCurrentWidget(self.nustatymai_screen)
-        
-
-
-
+        ap = Dialog()
+        ap.exec_()
 
     ###############################################################
 
     #!####### data laoding into the nustatymai page (islaidu_tipai) table, refreshed every single time screen methods are called ################################
 
     def load_data_islaidos(self):
-        ## changing bool value from db to aktyvus/neaktyvus 
-        def _boolean_convert(item : bool) -> str:
+        # changing bool value from db to aktyvus/neaktyvus
+        def _boolean_convert(item: bool) -> str:
             if item == True:
                 return 'Aktyvus'
             else:
                 return 'Neaktyvus'
 
         try:
-            _data = self.db.islaidos_query() # getting data,already ordered 
-            print(_data) #!## delete #####
+            _data = self.db.islaidos_query()  # getting data,already ordered
+            print(_data)  # !## delete #####
             if len(_data) == 0:
                 pass
             else:
-                self.ui.tableWidgetIslaidos.setRowCount(len(_data)) # setting exact number of rows to populate into the table widget
+                # setting exact number of rows to populate into the table widget
+                self.ui.tableWidgetIslaidos.setRowCount(len(_data))
                 row = 0
                 for val in _data:
-                    #populating data into rows
-                    self.ui.tableWidgetIslaidos.setItem(row, 0 , QtWidgets.QTableWidgetItem(str(val[1])))
-                    self.ui.tableWidgetIslaidos.setItem(row, 1 , QtWidgets.QTableWidgetItem(_boolean_convert(val[2])))
+                    # populating data into rows
+                    self.ui.tableWidgetIslaidos.setItem(
+                        row, 0, QtWidgets.QTableWidgetItem(str(val[1])))
+                    self.ui.tableWidgetIslaidos.setItem(
+                        row, 1, QtWidgets.QTableWidgetItem(_boolean_convert(val[2])))
                     row += 1
         except Exception as e:
             print(e)
-        
-
-
 
     #  method to show output
+
     def show_main(self):
         self.main_win.show()
 
