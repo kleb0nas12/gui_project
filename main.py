@@ -7,12 +7,6 @@ from widgets.islaidu_tipai import Dialog
 
 #### Here we implement the main working structure of the application and laying out full working logic behind it ##########
 
-# class Dialog(QDialog,Ui_IslTipForma):
-#     def __init__(self, parent=None):
-#         QDialog.__init__(self, parent)
-#         self.setupUi(self)
-
-
 class MainWindow:
     def __init__(self):
         # main window

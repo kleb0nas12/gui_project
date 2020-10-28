@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0, 'A:\gui_project')
 from layout import Ui_IslTipForma
 from database import MyDatabase
-from main import main
+from main import MainWindow
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 
 
