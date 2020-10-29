@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 
 
 
-#### Dialog box (naujo tipo ivedimas) functionality
+#### Dialog box (naujo tipo ivedimas)  functionality
 class Dialog(QDialog, Ui_IslTipForma):
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
@@ -21,11 +21,10 @@ class Dialog(QDialog, Ui_IslTipForma):
     # adding new 'islaidu tipas' to database
     def add_isl_tipa(self):
         _new_type :str = self.lineEdit.text()
-        print(_new_type)
         self.database.add_islaidos(_new_type,False)
         self.ch.nustatymai_screen() # refreshing main screen to see updated table
         self.close()
-
+### Islaidu-tipai edit dialog box functionality
 class DialogEdit(QDialog, Ui_Isleditforma):
     def __init__(self, parent=None, data=None):
         QDialog.__init__(self, parent)

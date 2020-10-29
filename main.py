@@ -59,7 +59,7 @@ class MainWindow:
 
     # islaidu-tipai edit widget
     def isl_data(self):
-        # getting current clicked row value
+        # getting current clicked row value,data=None
         def _getting_data() -> str:
             _ind = (self.ui.tableWidgetIslaidos.currentRow())
             _row_data = self.ui.tableWidgetIslaidos.item(

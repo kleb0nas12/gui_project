@@ -36,7 +36,7 @@ class Ui_Isleditforma(object):
 
     def retranslateUi(self, Isleditforma):
         _translate = QtCore.QCoreApplication.translate
-        Isleditforma.setWindowTitle(_translate("Isleditforma", "Dialog"))
+        Isleditforma.setWindowTitle(_translate("Isleditforma", "Keitimo forma"))
         self.label.setText(_translate("Isleditforma", "Pavadinimas:"))
         self.checkBox.setText(_translate("Isleditforma", "Aktyvus"))
         self.pushButton.setText(_translate("Isleditforma", "Saugoti"))
