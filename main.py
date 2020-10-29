@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QAbstractItemView, QApplication, QDialog, QMainWindo
 from layout import Ui_MainWindow
 from database import MyDatabase
 from PyQt5 import QtGui, QtWidgets
-import widgets as tipai
+import widgets as wdg
 
 #### Here we implement the main working structure of the application and laying out full working logic behind it ##########
 
@@ -38,13 +38,6 @@ class MainWindow:
         self.ui.tableWidgetIslaidos.itemDoubleClicked.connect(self.isl_data)
 #?###############################################################################################
 
-    def isl_data(self):
-        #getting current row value
-        def _getting_data() -> str:
-            _ind = (self.ui.tableWidgetIslaidos.currentRow())
-            _row_data = self.ui.tableWidgetIslaidos.item(_ind, 0).text() ## (_ind - row, 0 - column)
-            return _row_data
-
     #### main screens menu-elements/buttons functionality ########
     def pradzia_screen(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageHome)
@@ -61,8 +54,19 @@ class MainWindow:
     ############### dialog functionality ##########################
     # islaidu_tipai dialog pop-up
     def islaidu_dialog(self):
-        ap = tipai.Dialog()
-        ap.exec_()
+        _ap = wdg.Dialog()
+        _ap.exec_()
+
+    # islaidu-tipai edit widget
+    def isl_data(self):
+        # getting current clicked row value
+        def _getting_data() -> str:
+            _ind = (self.ui.tableWidgetIslaidos.currentRow())
+            _row_data = self.ui.tableWidgetIslaidos.item(
+                _ind, 0).text()  # (_ind - row, 0 - column)
+            return _row_data
+        _app = wdg.DialogEdit(data=_getting_data())
+        _app.exec_()
 
     ###############################################################
 
