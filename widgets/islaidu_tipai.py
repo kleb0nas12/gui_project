@@ -20,5 +20,5 @@ class Dialog(QDialog, Ui_IslTipForma):
         _new_type :str = self.lineEdit.text()
         print(_new_type)
         self.database.add_islaidos(_new_type,False)
-        self.ch.nustatymai_screen() # refreshing mane screen to see updated table
+        self.ch.nustatymai_screen() # refreshing main screen to see updated table
         self.close()
