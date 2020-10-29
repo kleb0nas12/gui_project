@@ -43,6 +43,7 @@ class MainWindow:
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageHome)
 
     def nustatymai_screen(self):
+        self.db.islaidos_query()
         self.load_data_islaidos()
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageNustatymai)
         # self.ui.tableWidgetIslaidos.viewport().repaint()
@@ -83,7 +84,7 @@ class MainWindow:
                 return 'Neaktyvus'
 
         try:
-            _data = self.db.islaidos_query()  # getting data,already ordered
+            _data = self.db.islaidos_tipai_query()  # getting data,already ordered
             if len(_data) == 0:
                 pass
             else:

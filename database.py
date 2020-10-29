@@ -14,12 +14,12 @@ class MyDatabase():
     # main query from islaidu_tipai table
     # table is ordered by active/inactive and then alphabetically
 
-    def islaidos_query(self) -> list:
+    def islaidos_tipai_query(self) -> list:
         try:
             self.cur.execute(
                 'SELECT * FROM islaidu_tipai ORDER BY aktyvus DESC, tipai ASC')
-            data = self.cur.fetchall()
-            return data
+            _data = self.cur.fetchall()
+            return _data
         except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute
             pass
@@ -37,6 +37,21 @@ class MyDatabase():
 
 #######################################################################################################
 
+################# DB functionality for islaidos screen ################################################
+    def islaidos_query(self):
+        try:
+            self.cur.execute(
+                'SELECT * FROM islaidos ORDER BY data DESC')
+            _data = self.cur.fetchall()
+            print(_data)
+            return _data
+        except (Exception, psycopg2.Error) as err:
+            # TODO# show dialog box if connection problem/failed to execute
+            pass
+
+
+#######################################################################################################
+
 ################################## Dialog box' functionality ##########################################
 
     # change type (active/inactive) on islaidu_tipai table and/or type itself
@@ -49,4 +64,4 @@ class MyDatabase():
         except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute
             print('Failed to execute', err)
-    ########################################################################################################
+    ######################################################################################################
