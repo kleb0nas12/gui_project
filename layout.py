@@ -6,7 +6,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 ### islaidos-forma input widget setLayout
 
-class Ui_islaidosForma(object):
+class Ui_IslaidosForma(object):
     def setupUi(self, islaidosForma):
         islaidosForma.setObjectName("islaidosForma")
         islaidosForma.resize(1007, 749)
@@ -21,6 +21,8 @@ class Ui_islaidosForma(object):
         self.lineEdit.setObjectName("lineEdit")
         self.dateEdit = QtWidgets.QDateEdit(islaidosForma)
         self.dateEdit.setGeometry(QtCore.QRect(690, 90, 141, 31))
+        self.dateEdit.setLocale(QtCore.QLocale(QtCore.QLocale.Lithuanian, QtCore.QLocale.Lithuania))
+        self.dateEdit.setCalendarPopup(True)
         self.dateEdit.setObjectName("dateEdit")
         self.checkBox = QtWidgets.QCheckBox(islaidosForma)
         self.checkBox.setGeometry(QtCore.QRect(490, 90, 101, 31))
@@ -76,7 +78,7 @@ class Ui_islaidosForma(object):
 
     def retranslateUi(self, islaidosForma):
         _translate = QtCore.QCoreApplication.translate
-        islaidosForma.setWindowTitle(_translate("islaidosForma", "Dialog"))
+        islaidosForma.setWindowTitle(_translate("islaidosForma", "Naujų išlaidų įvedimo forma"))
         self.label.setText(_translate("islaidosForma", "Data:"))
         self.checkBox.setText(_translate("islaidosForma", "Šiandien"))
         self.label_2.setText(_translate("islaidosForma", "Tipas:"))
@@ -85,6 +87,7 @@ class Ui_islaidosForma(object):
         self.label_5.setText(_translate("islaidosForma", "Suma, val_artikulas:"))
         self.pushButton.setText(_translate("islaidosForma", "Išsaugoti"))
         self.pushButton_2.setText(_translate("islaidosForma", "Uždaryti"))
+
 
 ### 'Islaidos-tipai' edit form
 class Ui_Isleditforma(object):
@@ -301,6 +304,7 @@ class Ui_MainWindow(object):
         self.dateEditFrom = QtWidgets.QDateEdit(self.pageIslaidos)
         self.dateEditFrom.setGeometry(QtCore.QRect(500, 220, 111, 31))
         self.dateEditFrom.setCurrentSection(QtWidgets.QDateTimeEdit.DaySection)
+        self.dateEditFrom.setLocale(QtCore.QLocale(QtCore.QLocale.Lithuanian, QtCore.QLocale.Lithuania))
         self.dateEditFrom.setCalendarPopup(True)
         self.dateEditFrom.setCurrentSectionIndex(0)
         self.dateEditFrom.setObjectName("dateEditFrom")
@@ -322,6 +326,7 @@ class Ui_MainWindow(object):
             QtCore.QDate(2000, 1, 1), QtCore.QTime(0, 7, 0)))
         self.dateEditTo.setCurrentSection(QtWidgets.QDateTimeEdit.DaySection)
         self.dateEditTo.setCalendarPopup(True)
+        self.dateEditTo.setLocale(QtCore.QLocale(QtCore.QLocale.Lithuanian, QtCore.QLocale.Lithuania))
         self.dateEditTo.setCurrentSectionIndex(0)
         self.dateEditTo.setTimeSpec(QtCore.Qt.UTC)
         self.dateEditTo.setObjectName("dateEditTo")

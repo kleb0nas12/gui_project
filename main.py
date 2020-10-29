@@ -18,7 +18,7 @@ class MainWindow:
 
 #?### here we describe functionality of all input/interaction elements (buttons,menu fiels ect.) of the main page  ####
 
-        # menu buttons
+        # menu and other main screen buttons
         self.ui.stackedWidget.setCurrentWidget(
             self.ui.pageNoData)  # if db connection inactive
         # pradzia menu button, sets screen to pradzia
@@ -29,6 +29,8 @@ class MainWindow:
         self.ui.pushButton_3.clicked.connect(self.islaidos_screen)
         # 'prideti tipa' button calls islaidu_tipai dialog
         self.ui.pushButton_4.clicked.connect(self.islaidu_dialog)
+        # 'prideti islaidas' button calls islaidos dialog
+        self.ui.pushButton_7.clicked.connect(self.add_islaidos)
 
         # islaidu-tipai table
         # disabling double click editing by default
@@ -55,8 +57,8 @@ class MainWindow:
     ############### dialog functionality ##########################
     # islaidu_tipai dialog pop-up
     def islaidu_dialog(self):
-        _ap = wdg.Dialog()
-        _ap.exec_()
+        _app = wdg.Dialog()
+        _app.exec_()
 
     # islaidu-tipai edit widget
     def isl_data(self):
@@ -70,6 +72,12 @@ class MainWindow:
             return [_row_data_type, _row_data_status]
         _app = wdg.DialogEdit(data=_getting_data())
         _app.exec_()
+
+    #add_islaidos dialog pop up
+    def add_islaidos(self):
+        _app = wdg.DialogIslaidos()
+        _app.exec_()
+
 
     ###############################################################
 
