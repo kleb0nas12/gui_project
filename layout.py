@@ -72,14 +72,21 @@ class Ui_IslaidosForma(object):
         self.pushButton_2 = QtWidgets.QPushButton(islaidosForma)
         self.pushButton_2.setGeometry(QtCore.QRect(490, 630, 121, 41))
         self.pushButton_2.setObjectName("pushButton_2")
+        self.label_6 = QtWidgets.QLabel(islaidosForma)
+        self.label_6.setGeometry(QtCore.QRect(440, 95, 31, 21))
+        self.label_6.setObjectName("label_6")
+        self.label_7 = QtWidgets.QLabel(islaidosForma)
+        self.label_7.setGeometry(QtCore.QRect(620, 90, 31, 31))
+        self.label_7.setObjectName("label_7")
 
         self.retranslateUi(islaidosForma)
         QtCore.QMetaObject.connectSlotsByName(islaidosForma)
 
     def retranslateUi(self, islaidosForma):
         _translate = QtCore.QCoreApplication.translate
-        islaidosForma.setWindowTitle(_translate("islaidosForma", "Naujų išlaidų įvedimo forma"))
+        islaidosForma.setWindowTitle(_translate("islaidosForma", "Dialog"))
         self.label.setText(_translate("islaidosForma", "Data:"))
+        self.lineEdit.setPlaceholderText(_translate("islaidosForma", "DD-MM-YYYY"))
         self.checkBox.setText(_translate("islaidosForma", "Šiandien"))
         self.label_2.setText(_translate("islaidosForma", "Tipas:"))
         self.label_3.setText(_translate("islaidosForma", "Tiekėjas:"))
@@ -87,6 +94,8 @@ class Ui_IslaidosForma(object):
         self.label_5.setText(_translate("islaidosForma", "Suma, val_artikulas:"))
         self.pushButton.setText(_translate("islaidosForma", "Išsaugoti"))
         self.pushButton_2.setText(_translate("islaidosForma", "Uždaryti"))
+        self.label_6.setText(_translate("islaidosForma", "arba"))
+        self.label_7.setText(_translate("islaidosForma", "arba"))
 
 
 ### 'Islaidos-tipai' edit form

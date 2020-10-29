@@ -26,7 +26,7 @@ class MyDatabase():
 
     # add values to islaidu_tipai table
 
-    def add_islaidos(self, tipai: str, aktyvus: bool):
+    def add_islaidos_tipai(self, tipai: str, aktyvus: bool):
         try:
             self.cur.execute(
                 "INSERT INTO islaidu_tipai(tipai, aktyvus) VALUES (%s, %s)", (tipai, aktyvus))
@@ -49,12 +49,24 @@ class MyDatabase():
             # TODO# show dialog box if connection problem/failed to execute
             pass
 
+     # add values to islaidos table
+
+    def add_islaidos(self, data: str, tipas: str, tiekejas: str, dok_nr: str, suma: float):
+        try:
+            self.cur.execute(
+                "INSERT INTO islaidos(data,tipas,tiekejas,dok_nr,suma) VALUES (%s, %s,%s,%s,%s)", (data, tipas, tiekejas, dok_nr, suma))
+            self.connection.commit()
+        except (Exception, psycopg2.Error) as err:
+            # TODO# show dialog box if connection problem/failed to execute
+            print('Failed to execute', err)
+
 
 #######################################################################################################
 
 ################################## Dialog box' functionality ##########################################
 
     # change type (active/inactive) on islaidu_tipai table and/or type itself
+
 
     def change_active_status(self, type_name: str, new_type: str, curr_type: bool):
         try:

@@ -60,7 +60,7 @@ class MainWindow:
         _app = wdg.Dialog()
         _app.exec_()
 
-    # islaidu-tipai edit widget
+    # islaidu-tipai edit widget pop-up
     def isl_data(self):
         # getting current clicked row value,data=None
         def _getting_data() -> list:
@@ -73,7 +73,7 @@ class MainWindow:
         _app = wdg.DialogEdit(data=_getting_data())
         _app.exec_()
 
-    #add_islaidos dialog pop up
+    #add_islaidos dialog pop-up
     def add_islaidos(self):
         _app = wdg.DialogIslaidos()
         _app.exec_()
