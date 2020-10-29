@@ -1,11 +1,12 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow
+from PyQt5.QtWidgets import QAbstractItemView, QApplication, QDialog, QMainWindow
 from layout import Ui_MainWindow
 from database import MyDatabase
-from PyQt5 import QtWidgets
+from PyQt5 import QtGui, QtWidgets
 import widgets as tipai
 
 #### Here we implement the main working structure of the application and laying out full working logic behind it ##########
+
 
 class MainWindow:
     def __init__(self):
@@ -16,6 +17,8 @@ class MainWindow:
         self.db = MyDatabase()  # initializing Postgres database connection and methods
 
 #?### here we describe functionality of all input/interaction elements (buttons,menu fiels ect.) ####
+
+        # menu buttons
         self.ui.stackedWidget.setCurrentWidget(
             self.ui.pageNoData)  # if db connection inactive
         # pradzia menu button, sets screen to pradzia
@@ -26,7 +29,21 @@ class MainWindow:
         self.ui.pushButton_3.clicked.connect(self.islaidos_screen)
         # 'prideti tipa' button calls islaidu_tipai dialog
         self.ui.pushButton_4.clicked.connect(self.islaidu_dialog)
+
+        # islaidu-tipai table
+        # disabling double click editing by default
+        self.ui.tableWidgetIslaidos.setEditTriggers(
+            QAbstractItemView.NoEditTriggers)
+        # getting values of a selected row and passing to the editor screen
+        self.ui.tableWidgetIslaidos.itemDoubleClicked.connect(self.isl_data)
 #?###############################################################################################
+
+    def isl_data(self):
+        #getting current row value
+        def _getting_data() -> str:
+            _ind = (self.ui.tableWidgetIslaidos.currentRow())
+            _row_data = self.ui.tableWidgetIslaidos.item(_ind, 0).text() ## (_ind - row, 0 - column)
+            return _row_data
 
     #### main screens menu-elements/buttons functionality ########
     def pradzia_screen(self):
@@ -35,9 +52,7 @@ class MainWindow:
     def nustatymai_screen(self):
         self.load_data_islaidos()
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageNustatymai)
-        #self.ui.tableWidgetIslaidos.viewport().repaint()
-        
-        
+        # self.ui.tableWidgetIslaidos.viewport().repaint()
 
     def islaidos_screen(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageIslaidos)
