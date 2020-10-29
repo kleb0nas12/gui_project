@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow
 from layout import Ui_MainWindow
 from database import MyDatabase
 from PyQt5 import QtWidgets
-import widgets.islaidu_tipai as tipai
+import widgets as tipai
 
 #### Here we implement the main working structure of the application and laying out full working logic behind it ##########
 

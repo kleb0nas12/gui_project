@@ -1,5 +1,4 @@
 import sys
-sys.path.insert(0, 'A:\gui_project')
 from layout import Ui_IslTipForma
 from database import MyDatabase
 import main
