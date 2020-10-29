@@ -84,7 +84,6 @@ class MainWindow:
 
         try:
             _data = self.db.islaidos_query()  # getting data,already ordered
-            print(_data)  # !## delete #####
             if len(_data) == 0:
                 pass
             else:

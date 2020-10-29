@@ -244,7 +244,7 @@ class Ui_MainWindow(object):
         self.dateEditTo.setTimeSpec(QtCore.Qt.UTC)
         self.dateEditTo.setObjectName("dateEditTo")
         self.label_7 = QtWidgets.QLabel(self.pageIslaidos)
-        self.label_7.setGeometry(QtCore.QRect(640, 150, 47, 16))
+        self.label_7.setGeometry(QtCore.QRect(640, 150, 70, 16))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_7.setFont(font)
@@ -350,7 +350,7 @@ class Ui_MainWindow(object):
     # naming function for layout properties
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "ERP platforma"))
         self.pushButton.setText(_translate("MainWindow", "Pradžia"))
         self.pushButton_2.setText(_translate("MainWindow", "Nustatymai"))
         self.pushButton_3.setText(_translate("MainWindow", "Išlaidos"))
@@ -369,7 +369,7 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Aktyvus"))
         self.label_5.setText(_translate("MainWindow", "Nuo:"))
         self.label_6.setText(_translate("MainWindow", "Iki:"))
-        self.label_7.setText(_translate("MainWindow", "DATA"))
+        self.label_7.setText(_translate("MainWindow", "Periodas"))
         self.label_8.setText(_translate("MainWindow", "arba"))
         self.pushButton_5.setText(_translate("MainWindow", "ieškoti"))
         self.label_4.setText(_translate("MainWindow", "TIPAS"))

@@ -23,26 +23,39 @@ class Dialog(QDialog, Ui_IslTipForma):
         self.database.add_islaidos(_new_type, False)
         self.ch.nustatymai_screen()  # refreshing main screen to see updated table
         self.close()
+
+
 # Islaidu-tipai edit dialog box functionality
-
-
 class DialogEdit(QDialog, Ui_Isleditforma):
     def __init__(self, parent=None, data=None):
         QDialog.__init__(self, parent)
         self.data = data
-        self.database = MyDatabase()
+        self.db = MyDatabase()
         self.ch = main.MainWindow()
         self.setupUi(self)
+
         # showing checked box if record in db is already 'active'
+        self.lineEdit.setText('{}'.format(self.data[0])) ## setting current type record to the edit box screen
         if self.data[1] == 'Aktyvus':
-            self.checkBox.setChecked()
+            self.checkBox.setChecked(True)
         self.pushButton.clicked.connect(self.change_state)
         self.pushButton_2.clicked.connect(self.close)
         self.ch.nustatymai_screen()  # refreshing main screen to see updated table
     
-    # method to change data record of active/inactive to a database
+    # method to change data record of active/inactive and/or type to a database
     def change_state(self):
-        if self.checkBox.isChecked():
-            self.database.change_active_status(self.data[0], True)
-        else:
-            self.database.change_active_status(self.data[0], False)
+        try:
+            if self.data[0] != self.lineEdit.text(): #if user edit type name
+                _edited_type = self.lineEdit.text()
+                if self.checkBox.isChecked() == True:
+                    self.db.change_active_status(self.data[0],_edited_type, True)
+                else:
+                    self.db.change_active_status(self.data[0],_edited_type, False)
+            else:
+                 if self.checkBox.isChecked() == True:
+                    self.db.change_active_status(self.data[0],self.data[0], True)
+                 else:
+                    self.db.change_active_status(self.data[0],self.data[0], False)
+        except Exception as e:
+            print(e)
+        self.close()

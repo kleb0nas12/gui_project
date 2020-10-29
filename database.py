@@ -4,7 +4,7 @@ import psycopg2
 
 
 class MyDatabase():
-    def __init__(self, host: str = 'localhost', db: str = 'first', user: str = 'postgres', password: str = 'admin'):  # port is deault = 5432
+    def __init__(self, host: str = 'localhost', db: str = 'first', user: str = 'postgres', password: str = 'admin'):  # default port number = 5432
         self.connection = psycopg2.connect(
             host=host, database=db, user=user, password=password)
         self.cur = self.connection.cursor()
@@ -39,16 +39,14 @@ class MyDatabase():
 
 ################################## Dialog box' functionality ##########################################
 
-### chnage type (active/inactive) on islaidu_tipai table
-def change_active_status(self, type_name: str, curr_type: bool):
-       try:
+    # change type (active/inactive) on islaidu_tipai table and/or type itself
+
+    def change_active_status(self, type_name: str, new_type: str, curr_type: bool):
+        try:
             self.cur.execute(
-                "UPDATE islaidu_tipai SET aktyvus = %s WHERE tipai = '%s'", (curr_type, type_name))
+                "UPDATE islaidu_tipai SET aktyvus = %s, tipai = %s WHERE tipai = %s", (curr_type, new_type, type_name))
             self.connection.commit()
-       except (Exception, psycopg2.Error) as err:
+        except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute
             print('Failed to execute', err)
-########################################################################################################
-
-
-
+    ########################################################################################################
