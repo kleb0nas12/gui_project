@@ -48,6 +48,7 @@ def change_active_status(self, type_name: str, curr_type: bool):
        except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute
             print('Failed to execute', err)
+########################################################################################################
 
 
 

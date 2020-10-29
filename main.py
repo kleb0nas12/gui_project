@@ -16,7 +16,7 @@ class MainWindow:
         self.ui.setupUi(self.main_win)
         self.db = MyDatabase()  # initializing Postgres database connection and methods
 
-#?### here we describe functionality of all input/interaction elements (buttons,menu fiels ect.) ####
+#?### here we describe functionality of all input/interaction elements (buttons,menu fiels ect.) of the main page  ####
 
         # menu buttons
         self.ui.stackedWidget.setCurrentWidget(
@@ -60,11 +60,13 @@ class MainWindow:
     # islaidu-tipai edit widget
     def isl_data(self):
         # getting current clicked row value,data=None
-        def _getting_data() -> str:
-            _ind = (self.ui.tableWidgetIslaidos.currentRow())
-            _row_data = self.ui.tableWidgetIslaidos.item(
+        def _getting_data() -> list:
+            _ind = self.ui.tableWidgetIslaidos.currentRow()
+            _row_data_type = self.ui.tableWidgetIslaidos.item(
                 _ind, 0).text()  # (_ind - row, 0 - column)
-            return _row_data
+            _row_data_status= self.ui.tableWidgetIslaidos.item(
+                _ind, 1).text()  # (_ind - row, 1 - column)
+            return [_row_data_type, _row_data_status]
         _app = wdg.DialogEdit(data=_getting_data())
         _app.exec_()
 
