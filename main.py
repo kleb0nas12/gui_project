@@ -51,6 +51,7 @@ class MainWindow:
         # self.ui.tableWidgetIslaidos.viewport().repaint()
 
     def islaidos_screen(self):
+        self.load_islaidos()
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageIslaidos)
     ###############################################################
 
@@ -97,16 +98,43 @@ class MainWindow:
             else:
                 # setting exact number of rows to populate into the table widget
                 self.ui.tableWidgetIslaidos.setRowCount(len(_data))
-                row = 0
+                _row = 0
                 for val in _data:
                     # populating data into rows
                     self.ui.tableWidgetIslaidos.setItem(
-                        row, 0, QtWidgets.QTableWidgetItem(str(val[1])))
+                        _row, 0, QtWidgets.QTableWidgetItem(str(val[1])))
                     self.ui.tableWidgetIslaidos.setItem(
-                        row, 1, QtWidgets.QTableWidgetItem(_boolean_convert(val[2])))
-                    row += 1
+                        _row, 1, QtWidgets.QTableWidgetItem(_boolean_convert(val[2])))
+                    _row += 1
         except Exception as e:
             print(e)
+
+    # data population to islaidos data screen/widgets
+    def load_islaidos(self):
+        try:
+            _data = self.db.islaidos_query()  # getting data,already ordered by date
+            if (len(_data) == 0):
+                pass
+            else:
+                self.ui.tableWidgetMain.setRowCount(len(_data)+1)
+                _row = 0
+                for inf in _data: ##populating data to islaidos table
+                    self.ui.tableWidgetMain.setItem(
+                        _row, 0, QtWidgets.QTableWidgetItem(str(inf[1])))
+                    self.ui.tableWidgetMain.setItem(
+                        _row, 1, QtWidgets.QTableWidgetItem(str(inf[2])))
+                    self.ui.tableWidgetMain.setItem(
+                        _row, 2, QtWidgets.QTableWidgetItem(str(inf[3])))
+                    self.ui.tableWidgetMain.setItem(
+                        _row, 3, QtWidgets.QTableWidgetItem(str(inf[4])))
+                    self.ui.tableWidgetMain.setItem(
+                        _row, 4, QtWidgets.QTableWidgetItem(str(inf[5])))
+                    self.btn_del = QtWidgets.QPushButton('Delete')
+                    self.ui.tableWidgetMain.setCellWidget(_row, 5,self.btn_del) # adding delete button to last row cell
+                    _row += 1
+        except Exception as e:
+            print(e)
+
     #!############################################################################################################
     #  method to show output
 
