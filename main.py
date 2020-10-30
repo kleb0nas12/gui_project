@@ -30,7 +30,7 @@ class MainWindow:
         # 'prideti tipa' button calls islaidu_tipai dialog
         self.ui.pushButton_4.clicked.connect(self.islaidu_dialog)
         # 'prideti islaidas' button calls islaidos dialog
-        self.ui.pushButton_7.clicked.connect(self.add_islaidos)
+        self.ui.pushButton_7.clicked.connect(self.islaidos)
 
         # islaidu-tipai table
         # disabling double click editing by default
@@ -67,17 +67,16 @@ class MainWindow:
             _ind = self.ui.tableWidgetIslaidos.currentRow()
             _row_data_type = self.ui.tableWidgetIslaidos.item(
                 _ind, 0).text()  # (_ind - row, 0 - column)
-            _row_data_status= self.ui.tableWidgetIslaidos.item(
+            _row_data_status = self.ui.tableWidgetIslaidos.item(
                 _ind, 1).text()  # (_ind - row, 1 - column)
             return [_row_data_type, _row_data_status]
         _app = wdg.DialogEdit(data=_getting_data())
         _app.exec_()
 
-    #add_islaidos dialog pop-up
-    def add_islaidos(self):
+    # islaidos dialog pop-up
+    def islaidos(self):
         _app = wdg.DialogIslaidos()
         _app.exec_()
-
 
     ###############################################################
 

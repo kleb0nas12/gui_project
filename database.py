@@ -38,7 +38,7 @@ class MyDatabase():
 #######################################################################################################
 
 ################# DB functionality for islaidos screen ################################################
-    def islaidos_query(self):
+    def islaidos_query(self) -> list:
         try:
             self.cur.execute(
                 'SELECT * FROM islaidos ORDER BY data DESC')
@@ -59,6 +59,7 @@ class MyDatabase():
         except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute
             print('Failed to execute', err)
+    
 
 
 #######################################################################################################
@@ -76,4 +77,6 @@ class MyDatabase():
         except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute
             print('Failed to execute', err)
+
+    
     ######################################################################################################

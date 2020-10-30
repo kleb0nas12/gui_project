@@ -78,6 +78,9 @@ class Ui_IslaidosForma(object):
         self.label_7 = QtWidgets.QLabel(islaidosForma)
         self.label_7.setGeometry(QtCore.QRect(620, 90, 31, 31))
         self.label_7.setObjectName("label_7")
+        self.pushButton_3 = QtWidgets.QPushButton(islaidosForma)
+        self.pushButton_3.setGeometry(QtCore.QRect(650, 167, 111, 31))
+        self.pushButton_3.setObjectName("pushButton_3")
 
         self.retranslateUi(islaidosForma)
         QtCore.QMetaObject.connectSlotsByName(islaidosForma)
@@ -96,6 +99,7 @@ class Ui_IslaidosForma(object):
         self.pushButton_2.setText(_translate("islaidosForma", "Uždaryti"))
         self.label_6.setText(_translate("islaidosForma", "arba"))
         self.label_7.setText(_translate("islaidosForma", "arba"))
+        self.pushButton_3.setText(_translate("islaidosForma", "Įvesti naują"))
 
 
 ### 'Islaidos-tipai' edit form
