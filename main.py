@@ -80,8 +80,8 @@ class MainWindow:
 
     ###############################################################
 
-    #!####### data laoding into the nustatymai page (islaidu_tipai) table, refreshed every single time screen methods are called ################################
-
+    #!####### data laoding into data tables: islaidu tipai and islaidos screen ################################
+    # data population to lsaidu_tipai data screen/widget
     def load_islaidos_tipai(self):
         # changing bool value from db to aktyvus/neaktyvus
         def _boolean_convert(item: bool) -> str:
@@ -107,7 +107,7 @@ class MainWindow:
                     row += 1
         except Exception as e:
             print(e)
-
+    #!############################################################################################################
     #  method to show output
 
     def show_main(self):

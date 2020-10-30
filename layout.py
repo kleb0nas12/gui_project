@@ -89,7 +89,7 @@ class Ui_IslaidosForma(object):
         _translate = QtCore.QCoreApplication.translate
         islaidosForma.setWindowTitle(_translate("islaidosForma", "Dialog"))
         self.label.setText(_translate("islaidosForma", "Data:"))
-        self.lineEdit.setPlaceholderText(_translate("islaidosForma", "DD-MM-YYYY"))
+        self.lineEdit.setPlaceholderText(_translate("islaidosForma", "YYYY-MM-DD"))
         self.checkBox.setText(_translate("islaidosForma", "Šiandien"))
         self.label_2.setText(_translate("islaidosForma", "Tipas:"))
         self.label_3.setText(_translate("islaidosForma", "Tiekėjas:"))

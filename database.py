@@ -47,7 +47,7 @@ class MyDatabase():
             return _data
         except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute
-            pass
+            print(err)
 
      # add values to islaidos table
 

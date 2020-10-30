@@ -1,4 +1,5 @@
 import sys
+from datetime import datetime
 from layout import Ui_IslTipForma, Ui_Isleditforma, Ui_IslaidosForma
 from database import MyDatabase
 import main
@@ -68,22 +69,45 @@ class DialogEdit(QDialog, Ui_Isleditforma):
 
 # Dialog box (naujo tipo ivedimas)  functionality
 
+
 class DialogIslaidos(QDialog, Ui_IslaidosForma):
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
         self.database = MyDatabase()
         self.ch = main.MainWindow()
         self.setupUi(self)
-        self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime()) ##setting calendar pop ups to current dates
-        self.comboBox.addItems(self.database.get_box_info()) ### adding islaidu tipus to choose combo box
-        self.pushButton_3.clicked.connect(self.call_isl_tipai) ## Ivesti nauja button calls add_new_type widget from nustatymai (menu)- > add new type 
-        self.pushButton.clicked.connect(self.add_islaidos_info) ## saving new islaidos to database
+        # setting calendar pop ups to current dates
+        self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        # adding islaidu tipus to choose combo box
+        self.comboBox.addItems(self.database.get_box_info())
+        # Ivesti nauja button calls add_new_type widget from nustatymai (menu)- > add new type
+        self.pushButton_3.clicked.connect(self.call_isl_tipai)
+        # saving new islaidos to database
+        self.pushButton.clicked.connect(self.add_islaidos_info)
         self.pushButton_2.clicked.connect(self.close)
 
     def call_isl_tipai(self):
         _app = Dialog()
         _app.exec_()
 
-
     def add_islaidos_info(self):
-        self.close()
+        #self.database.islaidos_query()
+        try:
+            def _check_data() -> str:  # checking which option is checked / chosen for date element
+                if self.lineEdit.text():
+                    _date = self.lineEdit.text()  # if date entered manually
+                elif self.checkBox.isChecked():
+                    _date = datetime.now().strftime('%Y-%m-%d')
+                else:
+                    _date = self.dateEdit.date().toString(QtCore.Qt.ISODate)
+                return _date
+            _type_chosen = self.comboBox.currentText()
+            _tiekejas = self.lineEdit_2.text()
+            _doc_nr = self.lineEdit_3.text()
+            _suma  = float(self.lineEdit_4.text()) #!### finish this after all
+            self.database.add_islaidos(_check_data(),_type_chosen,_tiekejas,_doc_nr,_suma)
+            self.close()
+        except Exception as e:
+            print(e)
+
+
