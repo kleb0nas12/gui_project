@@ -46,7 +46,7 @@ class MainWindow:
 
     def nustatymai_screen(self):
         self.db.islaidos_query()
-        self.load_data_islaidos()
+        self.load_islaidos_tipai()
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageNustatymai)
         # self.ui.tableWidgetIslaidos.viewport().repaint()
 
@@ -82,7 +82,7 @@ class MainWindow:
 
     #!####### data laoding into the nustatymai page (islaidu_tipai) table, refreshed every single time screen methods are called ################################
 
-    def load_data_islaidos(self):
+    def load_islaidos_tipai(self):
         # changing bool value from db to aktyvus/neaktyvus
         def _boolean_convert(item: bool) -> str:
             if item == True:

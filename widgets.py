@@ -74,6 +74,16 @@ class DialogIslaidos(QDialog, Ui_IslaidosForma):
         self.database = MyDatabase()
         self.ch = main.MainWindow()
         self.setupUi(self)
-        self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
-        self.pushButton.clicked.connect(self.close)
+        self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime()) ##setting calendar pop ups to current dates
+        self.comboBox.addItems(self.database.get_box_info()) ### adding islaidu tipus to choose combo box
+        self.pushButton_3.clicked.connect(self.call_isl_tipai) ## Ivesti nauja button calls add_new_type widget from nustatymai (menu)- > add new type 
+        self.pushButton.clicked.connect(self.add_islaidos_info) ## saving new islaidos to database
         self.pushButton_2.clicked.connect(self.close)
+
+    def call_isl_tipai(self):
+        _app = Dialog()
+        _app.exec_()
+
+
+    def add_islaidos_info(self):
+        self.close()
