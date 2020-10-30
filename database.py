@@ -59,26 +59,39 @@ class MyDatabase():
         except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute
             print('Failed to execute', err)
-    
+
     # getting all types from islaidu_tipai for box selection on add_new_islaidos widget
     def get_box_info(self) -> list:
         try:
             self.cur.execute(
                 'SELECT tipai FROM islaidu_tipai WHERE aktyvus = True ORDER BY tipai ASC')
             _data = self.cur.fetchall()
-            return [el[0] for el in _data] ## returning sorted data from db : list of tuples -> list
+            # returning sorted data from db : list of tuples -> list
+            return [el[0] for el in _data]
         except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute
             print(err)
 
 
+#######################################################################################################
 
+################# DB functionality for Pradzia screen #################################################
+# getting whole sum in a current month for the ataskaita
+
+    def whole_month_sum(self) -> str :
+        try:
+            self.cur.execute(
+                'SELECT suma FROM islaidos WHERE EXTRACT(MONTH FROM data) = 10')
+            _data = self.cur.fetchall()
+            return str('{:.2f}'.format(float(sum([_sum[0] for _sum in _data]))))
+        except (Exception, psycopg2.Error) as err:
+            # TODO# show dialog box if connection problem/failed to execute
+            print(err)
 #######################################################################################################
 
 ################################## Dialog box' functionality ##########################################
 
     # change type (active/inactive) on islaidu_tipai table and/or type itself
-
 
     def change_active_status(self, type_name: str, new_type: str, curr_type: bool):
         try:
@@ -89,5 +102,4 @@ class MyDatabase():
             # TODO# show dialog box if connection problem/failed to execute
             print('Failed to execute', err)
 
-    
     ######################################################################################################

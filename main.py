@@ -31,17 +31,29 @@ class MainWindow:
         self.ui.pushButton_4.clicked.connect(self.islaidu_dialog)
         # 'prideti islaidas' button calls islaidos dialog
         self.ui.pushButton_7.clicked.connect(self.islaidos)
+        # Pradzia screen -> prideti islaidas button calls islaidu add_forma
+        self.ui.pushButtonIslaidosMain.clicked.connect(self.islaidos)
 
         # islaidu-tipai table
-        # disabling double click editing by default
+        # disabling double click editing by default on islaidu-tipai table
         self.ui.tableWidgetIslaidos.setEditTriggers(
             QAbstractItemView.NoEditTriggers)
         # getting values of a selected row and passing to the editor screen
         self.ui.tableWidgetIslaidos.itemDoubleClicked.connect(self.isl_data)
+
+        # islaidos table
+        # disabling double click editing by default on islaidos table
+        self.ui.tableWidgetMain.setEditTriggers(
+            QAbstractItemView.NoEditTriggers)
+        # getting values of a selected row and passing to the editor screen
+        # self.ui.tableWidgetIslaidos.itemDoubleClicked.connect(self.isl_data)
+
 #?###############################################################################################
 
     #### main screens menu-elements/buttons functionality ########
     def pradzia_screen(self):
+        self.db.whole_month_sum()
+        self.ui.label_2.setText("{} €".format(self.db.whole_month_sum()))
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageHome)
 
     def nustatymai_screen(self):
@@ -118,7 +130,8 @@ class MainWindow:
             else:
                 self.ui.tableWidgetMain.setRowCount(len(_data)+1)
                 _row = 0
-                for inf in _data: ##populating data to islaidos table
+                _sum: float = 0
+                for inf in _data:  # populating data to islaidos table
                     self.ui.tableWidgetMain.setItem(
                         _row, 0, QtWidgets.QTableWidgetItem(str(inf[1])))
                     self.ui.tableWidgetMain.setItem(
@@ -130,8 +143,17 @@ class MainWindow:
                     self.ui.tableWidgetMain.setItem(
                         _row, 4, QtWidgets.QTableWidgetItem(str(inf[5])))
                     self.btn_del = QtWidgets.QPushButton('Delete')
-                    self.ui.tableWidgetMain.setCellWidget(_row, 5,self.btn_del) # adding delete button to last row cell
+                    # adding delete button to last row cell
+                    self.ui.tableWidgetMain.setCellWidget(
+                        _row, 5, self.btn_del)
                     _row += 1
+                    _sum += float(inf[5])
+                self.ui.tableWidgetMain.setItem(
+                    _row, 3, QtWidgets.QTableWidgetItem('Viso:'))  # showing extra row label
+                self.ui.tableWidgetMain.setItem(
+                    _row, 4, QtWidgets.QTableWidgetItem(str(round(_sum, 2))))  # showing whole sum for current selection of data expenses
+                self.ui.tableWidgetMain.verticalHeader().setSectionResizeMode(
+                    _row, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as e:
             print(e)
 

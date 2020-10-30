@@ -1,5 +1,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from database import MyDatabase
 
 
 ############ basic layout/GUI for the application #################################
@@ -87,7 +88,7 @@ class Ui_IslaidosForma(object):
 
     def retranslateUi(self, islaidosForma):
         _translate = QtCore.QCoreApplication.translate
-        islaidosForma.setWindowTitle(_translate("islaidosForma", "Dialog"))
+        islaidosForma.setWindowTitle(_translate("islaidosForma", "Išlaidų įvedimo forma"))
         self.label.setText(_translate("islaidosForma", "Data:"))
         self.lineEdit.setPlaceholderText(_translate("islaidosForma", "YYYY-MM-DD"))
         self.checkBox.setText(_translate("islaidosForma", "Šiandien"))
@@ -277,7 +278,7 @@ class Ui_MainWindow(object):
         self.nasumas_label.setAlignment(QtCore.Qt.AlignCenter)
         self.nasumas_label.setObjectName("nasumas_label")
         self.label_3 = QtWidgets.QLabel(self.pageHome)
-        self.label_3.setGeometry(QtCore.QRect(600, 250, 101, 31))
+        self.label_3.setGeometry(QtCore.QRect(375, 250, 350, 31))
         font = QtGui.QFont()
         font.setPointSize(15)
         self.label_3.setFont(font)
@@ -469,6 +470,7 @@ class Ui_MainWindow(object):
 
     # naming function for layout properties
     def retranslateUi(self, MainWindow):
+        self.db = MyDatabase()
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "ERP platforma"))
         self.pushButton.setText(_translate("MainWindow", "Pradžia"))
@@ -477,11 +479,11 @@ class Ui_MainWindow(object):
         self.Meniu.setText(_translate("MainWindow", "Meniu"))
         self.label.setText(_translate(
             "MainWindow", "Patikrinkite , ar yra veikianti duomenų bazė"))
-        self.label_2.setText(_translate("MainWindow", "250,12 €"))
+        self.label_2.setText(_translate("MainWindow", "{} €").format(self.db.whole_month_sum()))
         self.pushButtonIslaidosMain.setText(
             _translate("MainWindow", "pridėti išlaidas"))
-        self.nasumas_label.setText(_translate("MainWindow", "Įmonės našumas"))
-        self.label_3.setText(_translate("MainWindow", "Išlaidos:"))
+        self.nasumas_label.setText(_translate("MainWindow", "Įmonės našumas :"))
+        self.label_3.setText(_translate("MainWindow", "Suminės šio mėnesio išlaidos:"))
         self.pushButton_4.setText(_translate("MainWindow", "pridėti tipą"))
         item = self.tableWidgetIslaidos.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Pavadinimas"))
