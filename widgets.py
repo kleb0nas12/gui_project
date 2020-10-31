@@ -149,7 +149,7 @@ class DialogIslaidosEdit(QDialog, Ui_IslaidosForma):
 
         # changing edit form win name
         self.setWindowTitle('Išlaidų redagavimo forma')
-        self.pushButton.clicked.connect(self.close)
+        self.pushButton.clicked.connect(self.update_islaidos_info)
         self.pushButton_2.clicked.connect(self.close)
 
     def _call_isl_tipai(self):
@@ -158,7 +158,6 @@ class DialogIslaidosEdit(QDialog, Ui_IslaidosForma):
     # updating islaidos data
 
     def update_islaidos_info(self):
-        #
         try:
             # checking is data element has been modified
             def _check_data() -> str:
@@ -168,41 +167,52 @@ class DialogIslaidosEdit(QDialog, Ui_IslaidosForma):
                     _dat = datetime.now().strftime('%Y-%m-%d')
                 else:
                     _dat = self.dateEdit.date().toString(QtCore.Qt.ISODate)
+                return _dat
             # checking is type element has been modified
 
             def _check_type() -> str:
                 if self.comboBox.currentText() != self._data[1]:
                     _typ = self.comboBox.currentText()
-                return _typ
+                    return _typ
+                else:
+                    return self._data[1]
             # checking is tiekejas element has been modified
 
             def _check_tiekejas() -> str:
                 if self.lineEdit_2.text() != self._data[2]:
                     _tiekejas = self.lineEdit_2.text()
-                return _tiekejas
+                    return _tiekejas
+                else:
+                    return self._data[2]
             # checking is dokumento numeris element has been modified
 
             def _check_dok_nr() -> str:
                 if self.lineEdit_3.text() != self._data[3]:
                     _dok_nr = self.lineEdit_3.text()
-                return _dok_nr
+                    return _dok_nr
+                else: 
+                    return self._data[3]
             # checking is suma element has been modified
 
             def _check_suma() -> str:
                 if self.lineEdit_4.text() != self.data[4]:
                     _sum = self.lineEdit_4.text()
-                return _sum
+                    return _sum
+                else: 
+                    return self._data[4]
             ## check if date options not putted in multiple options at the same time
             if self.lineEdit.text() == True and self.checkBox.isChecked() == True:
                 # TODO## return warning to choose only one option
+                print('Pavyko check')
                 pass
             else:
                 # executing transaction
                 self.database.change_islaidos_status(self._data[0], _check_data(), self._data[1], _check_type(), self._data[2], _check_tiekejas(
                 ), self._data[3], _check_dok_nr(), self._data[4], _check_suma())
+                self.close()
 
         except Exception as e:
-            print(e)
+            print('Klaida',e)
 
 
 #?#######################################################################################
