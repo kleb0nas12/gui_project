@@ -79,7 +79,8 @@ class MyDatabase():
 ################# DB functionality for Pradzia screen #################################################
 # getting whole sum in a current month for the ataskaita
 
-    def whole_month_sum(self) -> str :
+
+    def whole_month_sum(self) -> str:
         try:
             self.cur.execute(
                 'SELECT suma FROM islaidos WHERE EXTRACT(MONTH FROM data) = {}'.format(datetime.now().strftime('%m')))
@@ -98,6 +99,19 @@ class MyDatabase():
         try:
             self.cur.execute(
                 "UPDATE islaidu_tipai SET aktyvus = %s, tipai = %s WHERE tipai = %s", (curr_type, new_type, type_name))
+            self.connection.commit()
+        except (Exception, psycopg2.Error) as err:
+            # TODO# show dialog box if connection problem/failed to execute
+            print('Failed to execute', err)
+
+    # update information from islaidos forma edit  widget in changes are made
+
+    def change_islaidos_status(self, date: str, new_date: str, type_name: str, new_type_name: str,
+                             tiekejas: str, new_tiekejas: str, dok_nr: str, new_dok_nr: str, suma: str, new_suma: str):
+        try:
+            self.cur.execute(
+                "UPDATE islaidos SET data = %s, tipas = %s, tiekejas = %s, dok_nr = %s,suma = %s WHERE data = %s, tipas = %s, tiekejas = %s, dok_nr = %s,suma = %s",
+                (new_date, new_type_name, new_tiekejas, new_dok_nr, new_suma, date, type_name, tiekejas, dok_nr, suma))
             self.connection.commit()
         except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute

@@ -43,7 +43,7 @@ class DialogEdit(QDialog, Ui_Isleditforma):
         # showing checked box if record in db is already 'active'
         # setting current type record to the edit box screen
         self.lineEdit.setText('{}'.format(self._data[0]))
-        if self.data[1] == 'Aktyvus':
+        if self._data[1] == 'Aktyvus':
             self.checkBox.setChecked(True)
         self.pushButton.clicked.connect(self.change_state)
         self.pushButton_2.clicked.connect(self.close)
@@ -116,14 +116,14 @@ class DialogIslaidos(QDialog, Ui_IslaidosForma):
             print(e)
 
 
-
 # Dialog edit box (nauju islaidu ivedimas)  functionality
 
 
 class DialogIslaidosEdit(QDialog, Ui_IslaidosForma):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, data=None):
         QDialog.__init__(self, parent,)
         self.database = MyDatabase()
+        self._data = data
         self.ch = main.MainWindow()
         self.setupUi(self)
         # setting calendar pop ups to current dates
@@ -133,31 +133,74 @@ class DialogIslaidosEdit(QDialog, Ui_IslaidosForma):
         # Ivesti nauja button calls add_new_type widget from nustatymai (menu)- > add new type
         self.pushButton_3.clicked.connect(self._call_isl_tipai)
         # saving new islaidos to database
+
+        # setting current editable data
+        self.lineEdit.setText('{}'.format(self._data[0]))
+        # checking if type (in combox) is active or not, if not , there will be shown only active types
+        try:
+            self.comboBox.setCurrentText('{}'.format(self._data[1]))
+        except Exception as e:
+            print(e)
+        self.lineEdit_2.setText('{}'.format(self._data[2]))
+        self.lineEdit_3.setText('{}'.format(self._data[3]))
+        self.lineEdit_4.setText('{}'.format(self._data[4]))
+
+        ##
+
+        # changing edit form win name
+        self.setWindowTitle('Išlaidų redagavimo forma')
         self.pushButton.clicked.connect(self.close)
         self.pushButton_2.clicked.connect(self.close)
 
     def _call_isl_tipai(self):
         _app = Dialog()
         _app.exec_()
+    # updating islaidos data
 
     def update_islaidos_info(self):
-        # self.database.islaidos_query()
+        #
         try:
-            def _check_data() -> str:  # checking which option is checked / chosen for date element
-                if self.lineEdit.text():
-                    _date = self.lineEdit.text()  # if date entered manually
-                elif self.checkBox.isChecked():
-                    _date = datetime.now().strftime('%Y-%m-%d')
+            # checking is data element has been modified
+            def _check_data() -> str:
+                if self.lineEdit.text() != self._data[0]:
+                    _dat = self.lineEdit.text()
+                elif self.checkBox.isChecked() == True:
+                    _dat = datetime.now().strftime('%Y-%m-%d')
                 else:
-                    _date = self.dateEdit.date().toString(QtCore.Qt.ISODate)
-                return _date
-            _type_chosen = self.comboBox.currentText()
-            _tiekejas = self.lineEdit_2.text()
-            _doc_nr = self.lineEdit_3.text()
-            _suma = float(self.lineEdit_4.text())  # !### finish this after all
-            self.database.add_islaidos(
-                _check_data(), _type_chosen, _tiekejas, _doc_nr, _suma)
-            self.close()
+                    _dat = self.dateEdit.date().toString(QtCore.Qt.ISODate)
+            # checking is type element has been modified
+
+            def _check_type() -> str:
+                if self.comboBox.currentText() != self._data[1]:
+                    _typ = self.comboBox.currentText()
+                return _typ
+            # checking is tiekejas element has been modified
+
+            def _check_tiekejas() -> str:
+                if self.lineEdit_2.text() != self._data[2]:
+                    _tiekejas = self.lineEdit_2.text()
+                return _tiekejas
+            # checking is dokumento numeris element has been modified
+
+            def _check_dok_nr() -> str:
+                if self.lineEdit_3.text() != self._data[3]:
+                    _dok_nr = self.lineEdit_3.text()
+                return _dok_nr
+            # checking is suma element has been modified
+
+            def _check_suma() -> str:
+                if self.lineEdit_4.text() != self.data[4]:
+                    _sum = self.lineEdit_4.text()
+                return _sum
+            ## check if date options not putted in multiple options at the same time
+            if self.lineEdit.text() == True and self.checkBox.isChecked() == True:
+                # TODO## return warning to choose only one option
+                pass
+            else:
+                # executing transaction
+                self.database.change_islaidos_status(self._data[0], _check_data(), self._data[1], _check_type(), self._data[2], _check_tiekejas(
+                ), self._data[3], _check_dok_nr(), self._data[4], _check_suma())
+
         except Exception as e:
             print(e)
 

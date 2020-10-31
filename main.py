@@ -46,7 +46,7 @@ class MainWindow:
         self.ui.tableWidgetMain.setEditTriggers(
             QAbstractItemView.NoEditTriggers)
         # getting values of a selected row and passing to the editor screen
-        self.ui.tableWidgetMain.itemDoubleClicked.connect(self.isl_)
+        self.ui.tableWidgetMain.itemDoubleClicked.connect(self.islaidos_edit)
 
 
 #?###############################################################################################
@@ -96,13 +96,13 @@ class MainWindow:
     def islaidos_edit(self):
         def _get_curr_data()-> list: # getting current filled data into edit (islaidos) box
             _index=self.ui.tableWidgetMain.currentRow()
-            _date = self.ui.tableWidgetMain.item(_index,0).text()
+            _data = self.ui.tableWidgetMain.item(_index,0).text()
             _tipas = self.ui.tableWidgetMain.item(_index,1).text()
             _tiekejas = self.ui.tableWidgetMain.item(_index,2).text()
             _dok_nr = self.ui.tableWidgetMain.item(_index,3).text()
             _sum = self.ui.tableWidgetMain.item(_index,4).text()
-            return [_date, _tipas, _tiekejas,_dok_nr, _sum]
-        _app = wdg.DialogIslaidosEdit(data = _get_curr_data())
+            return [_data, _tipas, _tiekejas,_dok_nr, _sum]
+        _app = wdg.DialogIslaidosEdit(data=_get_curr_data())
         _app.exec_()
 
 
