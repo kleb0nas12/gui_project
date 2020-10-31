@@ -53,7 +53,6 @@ class MainWindow:
 
     #### main screens menu-elements/buttons functionality ########
 
-
     def pradzia_screen(self):
         _wsum = self.db.whole_month_sum()
         self.ui.label_2.setText("{} €".format(_wsum))
@@ -140,9 +139,25 @@ class MainWindow:
 
     # data population to islaidos data screen/widgets
     def load_islaidos(self):
+        def _button_action(): # delete button functionality
+            def _get_row_data()-> list:
+                _func = QtWidgets.QApplication.focusWidget()
+                _in = self.ui.tableWidgetMain.indexAt(_func.pos())
+                _row_nr=_in.row() # getting row number of pushed delete number
+                # data from the all row of pushed delete button
+                _data = self.ui.tableWidgetMain.item(_row_nr, 0).text()
+                _tipas = self.ui.tableWidgetMain.item(_row_nr, 1).text()
+                _tiekejas = self.ui.tableWidgetMain.item(_row_nr, 2).text()
+                _dok_nr = self.ui.tableWidgetMain.item(_row_nr, 3).text()
+                _sum = self.ui.tableWidgetMain.item(_row_nr, 4).text()
+                print([_data,_tipas, _tiekejas, _dok_nr, _sum])
+                return [_data,_tipas, _tiekejas, _dok_nr, _sum]
+            self.db.del_row_data(_get_row_data()) # executing query to database
+
+            
         try:
             _data = self.db.islaidos_query()  # getting data,already ordered by date
-            if (len(_data) == 0): #if table empty
+            if (len(_data) == 0):  # if table empty
                 self.ui.tableWidgetMain.setRowCount(len(_data)+1)
                 self.ui.tableWidgetMain.setItem(
                     0, 3, QtWidgets.QTableWidgetItem('Viso:'))  # showing extra row label
@@ -177,6 +192,8 @@ class MainWindow:
                     _row, 4, QtWidgets.QTableWidgetItem(str(round(_sum, 2))))  # showing whole sum for current selection of data expenses
                 self.ui.tableWidgetMain.verticalHeader().setSectionResizeMode(
                     _row, QtWidgets.QHeaderView.ResizeToContents)
+                # delete button signal
+                self.btn_del.clicked.connect(_button_action)
         except Exception as e:
             print(e)
 

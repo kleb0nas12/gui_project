@@ -72,6 +72,22 @@ class MyDatabase():
         except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute
             print(err)
+    # Deleting slelected row from DB by Delete button from islaidos table -> Islaidos screen
+
+    def del_row_data(self, row: list):
+        self.row = row
+        try:
+            self.cur.execute(
+                'SELECT id FROM islaidos WHERE(data = %s AND tipas = %s AND tiekejas = %s AND dok_nr = %s AND suma= %s)',
+                (self.row[0], self.row[1], self.row[2], self.row[3], self.row[4]))
+            _x = self.cur.fetchone()
+            self.cur.execute(
+                'DELETE FROM islaidos WHERE id = %s', (_x[0],))
+            self.connection.commit()
+
+        except (Exception, psycopg2.Error) as err:
+            # TODO# show dialog box if connection problem/failed to execute
+            print(err)
 
 
 #######################################################################################################

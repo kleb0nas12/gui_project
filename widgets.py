@@ -108,10 +108,14 @@ class DialogIslaidos(QDialog, Ui_IslaidosForma):
             _type_chosen = self.comboBox.currentText()
             _tiekejas = self.lineEdit_2.text()
             _doc_nr = self.lineEdit_3.text()
-            _suma = float(self.lineEdit_4.text())  # !### finish this after all
-            self.database.add_islaidos(
-                _check_data(), _type_chosen, _tiekejas, _doc_nr, _suma)
-            self.close()
+            _suma = float('{:.2}'.format(self.lineEdit_4.text()))  # !### finish this after all
+            if _suma <= 0.00:
+                #TODO return message box
+                pass
+            else:
+                self.database.add_islaidos(
+                    _check_data(), _type_chosen, _tiekejas, _doc_nr, _suma)
+                self.close()
         except Exception as e:
             print(e)
 
@@ -155,15 +159,13 @@ class DialogIslaidosEdit(QDialog, Ui_IslaidosForma):
     def _call_isl_tipai(self):
         _app = Dialog()
         _app.exec_()
-    # updating islaidos data
+    # updating islaidos info
 
     def update_islaidos_info(self):
         try:
             # checking is data element has been modified
             def _check_data() -> str:
-                if self.lineEdit.text() and self.lineEdit.text()== self._data[0]:
-                    _dat = self.lineEdit.text()
-                elif self.lineEdit.text() and self.lineEdit.text()!= self._data[0]:
+                if self.lineEdit.text():
                     _dat = self.lineEdit.text()
                 elif self.checkBox.isChecked() == True:
                     _dat = datetime.now().strftime('%Y-%m-%d')
@@ -207,6 +209,9 @@ class DialogIslaidosEdit(QDialog, Ui_IslaidosForma):
                 # TODO## return warning to choose only one option
                 print('Pavyko check')
                 pass
+            elif float(_check_suma()) <= 0.00:
+                pass
+                #TODO return error box
             else:
                 # executing transaction
                 self.database.change_islaidos_status(self._data[0], _check_data(), self._data[1], _check_type(), self._data[2], _check_tiekejas(
