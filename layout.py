@@ -479,7 +479,6 @@ class Ui_MainWindow(object):
         self.Meniu.setText(_translate("MainWindow", "Meniu"))
         self.label.setText(_translate(
             "MainWindow", "Patikrinkite , ar yra veikianti duomenų bazė"))
-        self.label_2.setText(_translate("MainWindow", "{} €").format(self.db.whole_month_sum()))
         self.pushButtonIslaidosMain.setText(
             _translate("MainWindow", "pridėti išlaidas"))
         self.nasumas_label.setText(_translate("MainWindow", "Įmonės našumas :"))

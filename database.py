@@ -1,4 +1,5 @@
 import psycopg2
+from datetime import datetime
 
 # here we implement PostgreSql database connection and functionality
 
@@ -81,7 +82,7 @@ class MyDatabase():
     def whole_month_sum(self) -> str :
         try:
             self.cur.execute(
-                'SELECT suma FROM islaidos WHERE EXTRACT(MONTH FROM data) = 10')
+                'SELECT suma FROM islaidos WHERE EXTRACT(MONTH FROM data) = {}'.format(datetime.now().strftime('%m')))
             _data = self.cur.fetchall()
             return str('{:.2f}'.format(float(sum([_sum[0] for _sum in _data]))))
         except (Exception, psycopg2.Error) as err:

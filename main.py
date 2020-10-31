@@ -46,7 +46,7 @@ class MainWindow:
         self.ui.tableWidgetMain.setEditTriggers(
             QAbstractItemView.NoEditTriggers)
         # getting values of a selected row and passing to the editor screen
-        # self.ui.tableWidgetIslaidos.itemDoubleClicked.connect(self.isl_data)
+        self.ui.tableWidgetIslaidos.itemDoubleClicked.connect(self.isl_data)
 
 #?###############################################################################################
 
