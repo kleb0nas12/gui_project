@@ -161,7 +161,9 @@ class DialogIslaidosEdit(QDialog, Ui_IslaidosForma):
         try:
             # checking is data element has been modified
             def _check_data() -> str:
-                if self.lineEdit.text() != self._data[0]:
+                if self.lineEdit.text() and self.lineEdit.text()== self._data[0]:
+                    _dat = self.lineEdit.text()
+                elif self.lineEdit.text() and self.lineEdit.text()!= self._data[0]:
                     _dat = self.lineEdit.text()
                 elif self.checkBox.isChecked() == True:
                     _dat = datetime.now().strftime('%Y-%m-%d')
@@ -195,13 +197,13 @@ class DialogIslaidosEdit(QDialog, Ui_IslaidosForma):
             # checking is suma element has been modified
 
             def _check_suma() -> str:
-                if self.lineEdit_4.text() != self.data[4]:
+                if self.lineEdit_4.text() != self._data[4]:
                     _sum = self.lineEdit_4.text()
                     return _sum
                 else: 
                     return self._data[4]
             ## check if date options not putted in multiple options at the same time
-            if self.lineEdit.text() == True and self.checkBox.isChecked() == True:
+            if self.lineEdit.text() and self.checkBox.isChecked() == True:
                 # TODO## return warning to choose only one option
                 print('Pavyko check')
                 pass

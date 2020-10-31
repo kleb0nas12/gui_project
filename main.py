@@ -142,8 +142,14 @@ class MainWindow:
     def load_islaidos(self):
         try:
             _data = self.db.islaidos_query()  # getting data,already ordered by date
-            if (len(_data) == 0):
-                pass
+            if (len(_data) == 0): #if table empty
+                self.ui.tableWidgetMain.setRowCount(len(_data)+1)
+                self.ui.tableWidgetMain.setItem(
+                    0, 3, QtWidgets.QTableWidgetItem('Viso:'))  # showing extra row label
+                self.ui.tableWidgetMain.setItem(
+                    0, 4, QtWidgets.QTableWidgetItem('0'))  # showing whole sum for current selection of data expenses
+                self.ui.tableWidgetMain.verticalHeader().setSectionResizeMode(
+                    0, QtWidgets.QHeaderView.ResizeToContents)
             else:
                 self.ui.tableWidgetMain.setRowCount(len(_data)+1)
                 _row = 0
