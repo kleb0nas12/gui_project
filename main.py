@@ -18,7 +18,7 @@ class MainWindow:
 
 #?### here we describe functionality of all input/interaction elements (buttons,menu fiels ect.) of the main page  ####
 
-        # menu and other main screen buttons
+        ## menu and other main screen buttons
         self.ui.stackedWidget.setCurrentWidget(
             self.ui.pageNoData)  # if db connection inactive
         # pradzia menu button, sets screen to pradzia
@@ -34,26 +34,27 @@ class MainWindow:
         # Pradzia screen -> prideti islaidas button calls islaidu add_forma
         self.ui.pushButtonIslaidosMain.clicked.connect(self.islaidos)
 
-        # islaidu-tipai table
+        ## islaidu-tipai table
         # disabling double click editing by default on islaidu-tipai table
         self.ui.tableWidgetIslaidos.setEditTriggers(
             QAbstractItemView.NoEditTriggers)
         # getting values of a selected row and passing to the editor screen
         self.ui.tableWidgetIslaidos.itemDoubleClicked.connect(self.isl_data)
 
-        # islaidos table
+        ## islaidos table
         # disabling double click editing by default on islaidos table
         self.ui.tableWidgetMain.setEditTriggers(
             QAbstractItemView.NoEditTriggers)
         # getting values of a selected row and passing to the editor screen
-        self.ui.tableWidgetIslaidos.itemDoubleClicked.connect(self.isl_data)
+        self.ui.tableWidgetMain.itemDoubleClicked.connect(self.isl_)
+
 
 #?###############################################################################################
 
     #### main screens menu-elements/buttons functionality ########
     def pradzia_screen(self):
-        self.db.whole_month_sum()
-        self.ui.label_2.setText("{} €".format(self.db.whole_month_sum()))
+        _wsum = self.db.whole_month_sum()
+        self.ui.label_2.setText("{} €".format(_wsum))
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageHome)
 
     def nustatymai_screen(self):
@@ -90,6 +91,20 @@ class MainWindow:
     def islaidos(self):
         _app = wdg.DialogIslaidos()
         _app.exec_()
+    
+    # islaidos edit widget pop-up
+    def islaidos_edit(self):
+        def _get_curr_data()-> list: # getting current filled data into edit (islaidos) box
+            _index=self.ui.tableWidgetMain.currentRow()
+            _date = self.ui.tableWidgetMain.item(_index,0).text()
+            _tipas = self.ui.tableWidgetMain.item(_index,1).text()
+            _tiekejas = self.ui.tableWidgetMain.item(_index,2).text()
+            _dok_nr = self.ui.tableWidgetMain.item(_index,3).text()
+            _sum = self.ui.tableWidgetMain.item(_index,4).text()
+            return [_date, _tipas, _tiekejas,_dok_nr, _sum]
+        _app = wdg.DialogIslaidosEdit(data = _get_curr_data())
+        _app.exec_()
+
 
     ###############################################################
 
