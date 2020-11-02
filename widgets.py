@@ -108,7 +108,7 @@ class DialogIslaidos(QDialog, Ui_IslaidosForma):
             _type_chosen = self.comboBox.currentText()
             _tiekejas = self.lineEdit_2.text()
             _doc_nr = self.lineEdit_3.text()
-            _suma = float('{:.2}'.format(self.lineEdit_4.text()))  # !### finish this after all
+            _suma = float('{:.2}'.format(self.lineEdit_4.text()))  
             if _suma <= 0.00:
                 #TODO return message box
                 pass
@@ -209,7 +209,7 @@ class DialogIslaidosEdit(QDialog, Ui_IslaidosForma):
                 # TODO## return warning to choose only one option
                 print('Pavyko check')
                 pass
-            elif float(_check_suma()) <= 0.00:
+            elif float(_check_suma()) <= 0:
                 pass
                 #TODO return error box, enter valid number
             else:

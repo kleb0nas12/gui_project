@@ -205,15 +205,9 @@ class MainWindow:
     def show_pie(self):
         self.db.pie_data()
         series = QtChart.QPieSeries()
-        series.append("Jane", 1)
-        series.append("Joe", 2)
-        series.append("Andy", 3)
-        series.append("Barbara", 4)
-        series.append("Axel", 5)
-
         chart = QtChart.QChart()
         chart.addSeries(series)
-        chart.setTitle("Simple piechart example")
+        chart.setTitle("Islaidos")
         chart.legend().hide()
 
         series.setLabelsVisible()
