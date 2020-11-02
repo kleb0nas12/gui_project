@@ -39,17 +39,31 @@ class MyDatabase():
 #######################################################################################################
 
 ################# DB functionality for islaidos screen ################################################
+
+    # getting current islaidu tipai selection
+
     def islaidos_query(self) -> list:
         try:
             self.cur.execute(
                 'SELECT * FROM islaidos ORDER BY data DESC')
+            _data = self.cur.fetchall()
+            return _data
+        except (Exception, psycopg2.Error) as err:
+            # TODO# show dialog box if connection problem/failed to execute
+            print(err)
+    
+    # getting data for pie chart
+
+    def pie_data(self) -> list:
+        try:
+            self.cur.execute(
+                'SELECT tipas, suma FROM islaidos')
             _data = self.cur.fetchall()
             print(_data)
             return _data
         except (Exception, psycopg2.Error) as err:
             # TODO# show dialog box if connection problem/failed to execute
             print(err)
-
      # add values to islaidos table
 
     def add_islaidos(self, data: str, tipas: str, tiekejas: str, dok_nr: str, suma: float):

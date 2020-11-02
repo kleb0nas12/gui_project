@@ -1,8 +1,8 @@
 import sys
-from PyQt5.QtWidgets import QAbstractItemView, QApplication, QDialog, QMainWindow
+from PyQt5.QtWidgets import QAbstractItemView, QApplication, QDialog, QGraphicsScene, QMainWindow
 from layout import Ui_MainWindow
 from database import MyDatabase
-from PyQt5 import QtGui, QtWidgets
+from PyQt5 import QtGui, QtWidgets, QtChart
 import widgets as wdg
 
 #### Here we implement the main working structure of the application and laying out full working logic behind it ##########
@@ -66,6 +66,7 @@ class MainWindow:
 
     def islaidos_screen(self):
         self.load_islaidos()
+        self.show_pie()
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageIslaidos)
     ###############################################################
 
@@ -198,6 +199,37 @@ class MainWindow:
             print(e)
 
     #!############################################################################################################
+
+    ### pie chart area ###
+    
+    def show_pie(self):
+        self.db.pie_data()
+        series = QtChart.QPieSeries()
+        series.append("Jane", 1)
+        series.append("Joe", 2)
+        series.append("Andy", 3)
+        series.append("Barbara", 4)
+        series.append("Axel", 5)
+
+        chart = QtChart.QChart()
+        chart.addSeries(series)
+        chart.setTitle("Simple piechart example")
+        chart.legend().hide()
+
+        series.setLabelsVisible()
+        series.setLabelsPosition(QtChart.QPieSlice.LabelInsideHorizontal)
+
+        for slice in series.slices():
+            slice.setLabel("{:.1f}%".format(100 * slice.percentage()))
+
+        chartView = QtChart.QChartView(chart)
+        chartView.setRenderHint(QtGui.QPainter.Antialiasing)
+        self.ui.graphicsView.setScene(chartView)
+        self.ui.graphicsView.show()
+
+
+
+    ##############################################################################################################
     #  method to show output
 
     def show_main(self):

@@ -211,7 +211,7 @@ class DialogIslaidosEdit(QDialog, Ui_IslaidosForma):
                 pass
             elif float(_check_suma()) <= 0.00:
                 pass
-                #TODO return error box
+                #TODO return error box, enter valid number
             else:
                 # executing transaction
                 self.database.change_islaidos_status(self._data[0], _check_data(), self._data[1], _check_type(), self._data[2], _check_tiekejas(
