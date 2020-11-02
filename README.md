@@ -2,12 +2,11 @@
 
 ## Required packages
 
-'''
+```
 pip install PyQt5
 pip install PyQtChart
 pip install psycopg2-binary
-
-'''
+```
 
 ## Before start
 
@@ -20,10 +19,10 @@ Setup local postgreSql database with parameters:
 
  Then create two tables with schemas (colummn_name(type)):
  - 'islaidu_tipai'  table (tipai(varchar[xx]), aktyvus(bool)))
- - 'islaidos'  table (data(date),  tipas(varchar[xx]),  tiekejas(varchar[xx]),  dok_nr(varchar[xx]),  suma(double precision))   # but usig numeric or decimal type with precision of 2 in this case scenarion would be better idea.
+ - 'islaidos'  table (data(date), tipas(varchar[xx]), tiekejas(varchar[xx]), dok_nr(varchar[xx]), suma(double precision))   # but usig numeric or decimal type with precision of 2 in this case scenarion would be better idea.
 
  ## Launch Script
- '''
-/.~ python main.py
 
-'''
+```
+/.~ python main.py
+```
