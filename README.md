@@ -26,7 +26,3 @@ Setup local postgreSql database with parameters:
 ```
 /.~ python main.py
 ```
-
-## Major drawbacks and problems
-Due to time constraints , there were some problems left. The major one is that main data representation widgets does not update, redraw itself after the data has been submitted or executed. Possible sollution is: instead of QTableWIdget use QTableView widget with QsQL package provided by Pyqt5 itself.
-So, as for example, if you add or change record ,you need to 'redraw that page manually' : example : if you add new type to islaidos_type, you need to prees 'Nustatymai' menu button to see changes to appear and so on. Due to this consistent problem some part of required task elements are not working. 
